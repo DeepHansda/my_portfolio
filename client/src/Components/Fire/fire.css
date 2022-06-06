@@ -1,0 +1,102 @@
+.fire {
+  background-image: linear-gradient( 134.6deg,  rgba(201,37,107,1) 15.4%, rgba(116,16,124,1) 74.7% );
+  padding: 25px 0px;
+  border-top: 1px solid rgb(225, 225, 225, 0.8);
+}
+
+@keyframes introBackground {
+  0% {
+    background-position: 0% 9%;
+  }
+  50% {
+    background-position: 100% 92%;
+  }
+  100% {
+    background-position: 0% 9%;
+  }
+}
+
+.fire-container {
+  max-width: 1280px;
+  margin: 20px;
+  overflow: visible;
+  padding-top: 40px;
+  border-top: 1px solid rgb(225, 225, 225, 0.6);
+}
+
+.fire-container .fire-card {
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  padding: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.103);
+  border-radius: 10px;
+  position: relative;
+  overflow: visible;
+}
+
+.fire-container .fire-card p {
+  font-family: "Poppins", sans-serif;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: capitalize;
+  text-align: center;
+}
+
+.fire-button-container {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+}
+.fire-button-container .fire-button {
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+  background-color: #e109f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.103);
+}
+.fire-button-container .fire-button p {
+  text-align: center;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  line-height: 20px;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 600px) {
+  .fire-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .fire-container .fire-card {
+    width: 520px;
+  }
+  .fire-container .fire-card p {
+    font-size: 25px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .fire-container {
+    margin: 10px auto;
+    align-items: start;
+    justify-content: flex-start;
+  }
+  .fire-button-container {
+    right: -80%;
+    top: 5%;
+  }
+  .fire-button-container .fire-button {
+    width: 120px;
+    height: 120px;
+    transition: all 1.2s ease;
+  }
+
+  .fire-button:hover {
+    margin: 30px 20px 0px 0px;
+  }
+}
