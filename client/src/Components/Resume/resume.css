@@ -3,11 +3,11 @@
 }
 .resume-container{
     position: relative;
-    margin-top:38px
+    /* margin-top:38px */
 
 }
 .resume-container button{
-    position: fixed;
+    /* position: fixed; */
     top: 0;
     right: 0;
 }

@@ -59,7 +59,9 @@
   z-index: -1;
 }
 
-
+.social-wrapper-container{
+  width: 100%;
+}
 
 
 @media screen and (min-width: 600px) {
@@ -71,7 +73,7 @@
         font-size: 3em;
       }
       .social-wrapper-container{
-        width:600px;
+        width:auto;
         margin:0 auto;
       }
       
@@ -80,7 +82,7 @@
   .footer-sections{
     display: flex;
     /* flex-direction: row-reverse; */
-    /* padding:5px 40px; */
+    padding:5px 40px;
 
   }
   .social-wrapper-container{
@@ -93,6 +95,7 @@
     padding: 5px 15px;
   }
 }
+
 
 @media screen and (min-width:1280px){
     .footer-container .footer-title h1 {

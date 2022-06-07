@@ -1,10 +1,10 @@
 export const ProgressData = [
   {
-    name: "html",
+    name: "HTML",
     percent: 80,
   },
   {
-    name: "css",
+    name: "CSS",
     percent: 80,
   },
   {

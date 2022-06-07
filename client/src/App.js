@@ -10,18 +10,23 @@ import axios from "axios";
 
 export const ProjectContext = createContext();
 function App() {
-
+const [openSideBar,setOpenSideBar] = useState(false)
  const dispatch = useDispatch()
 
   useEffect(()=>{
     dispatch(getProjects())
   },[])
+
   const projects = useSelector((state)=>{return state.projects})
+  const states ={
+    projects: projects,
+    setOpenSideBar: setOpenSideBar,
+  }
   return (
-    <ProjectContext.Provider value={projects}>
+    <ProjectContext.Provider value={states}>
       <div className="App" style={{ "overflowX": "hidden" }}>
-        {/* <Navbar /> */}
-        <Sidebar />
+        <Navbar openSideBar={openSideBar} setOpenSideBar={setOpenSideBar}/>
+        <Sidebar openSideBar={openSideBar} setOpenSideBar={setOpenSideBar}/>
         <ContactBar />
         <MyRoutes />
       </div>

@@ -4,7 +4,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 function WebSlider({ images }) {
-  console.log(images);
 
   var settings = {
     // dots: true,
@@ -54,7 +53,6 @@ function WebSlider({ images }) {
     <div className="web-slide-container">
       <Slider {...settings}>
         {images.map((image) => {
-          console.log(image);
           return (
             
             <div className="project-img">

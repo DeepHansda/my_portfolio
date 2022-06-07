@@ -1,18 +1,20 @@
 import React from "react";
+import { FiMenu } from "react-icons/fi";
 import "./navbar.css";
-function Navbar() {
+
+export default function Navbar({setOpenSideBar}) {
   return (
-    <div className="navbar">
-      <ul>
-        <li className="nav-item" id="logo">
-          <>
-            <h3>Deep Hansda</h3>
-          </>
+    <div className="portfolio-navbar">
+      <ul className="navbar-container">
+        <li className="nav-item item-one">
+          <p>
+            <FiMenu onClick={()=>{setOpenSideBar(true)}}/>
+          </p>
         </li>
-        
+        <li className="nav-item item-two">
+          <p>deep hansda</p>
+        </li>
       </ul>
     </div>
   );
 }
-
-export default Navbar;

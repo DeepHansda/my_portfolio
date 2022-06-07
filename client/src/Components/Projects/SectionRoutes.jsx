@@ -4,11 +4,13 @@ import Project from "../UI/WebAppUI/Project";
 import AndroidProject from "../UI/androidProjectUI/AndroidProject";
 import "./cat.css";
 export function WebSection() {
-  const data = useContext(ProjectContext);
+  const states = useContext(ProjectContext);
+  const data = states.projects
   const projects = data.filter((pro) => {
     return pro.type === "webApp";
   });
-  console.log(projects);
+
+  
   return (
     <>
       <div className="projects-container">

@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import "./about.css";
 import SocialContactBar from "../UI/ContactBar/ContactBar";
 import EmailNumber from "../UI/EmailNumber/EmailNumber";
 import aboutData from "../../Data/AboutData";
+import { ProjectContext } from "../../App";
 
 function About() {
+  const states = useContext(ProjectContext);
+  useEffect(() => {
+    states.setOpenSideBar(false);
+  }, []);
   return (
     <div className="about">
       <div className="about-text">
@@ -21,7 +26,6 @@ function About() {
           </p>
         </div>
       </div>
-     
 
       <div className="myTimeline">
         <div class="bg-gradient_solid">
@@ -50,7 +54,7 @@ function About() {
       <div className="emailNumber-container">
         <EmailNumber />
       </div>
-      <div className="social-wrapper-container">
+      <div className="about-social-wrapper-container">
         <SocialContactBar />
       </div>
     </div>

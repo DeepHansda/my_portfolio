@@ -1,33 +1,31 @@
-.navbar {
-        position: relative;
-    backdrop-filter: blur(10px);
-    background-color: transparent;
+.portfolio-navbar {
+    width: 100%;
 }
-
-.navbar ul {
+.portfolio-navbar .navbar-container {
     width: 100%;
     display:flex;
     align-items: center;
-    justify-content:space-between;
-    background-color: transparent;
-
+    padding: 5px;
 }
 
-.navbar ul .nav-item{
-    padding:10px 20px;
-}
 
-.navbar ul #co-name p{
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size:1.6em;
-    color : #000000;
-    
-}
+.portfolio-navbar .navbar-container .item-one{
+    font-size:25px;
+    cursor: pointer;
+    /* padding:5px; */
 
-#logo h3{
+}
+.portfolio-navbar .navbar-container .item-two{
+    padding:0px 10px;
+}
+.portfolio-navbar .navbar-container .item-two p{
     font-family: 'Square Peg', cursive;
-    font-size:28px;
-
+    font-size: 30px;
+    text-transform: capitalize;
 }
 
+@media screen and (min-width:1280px){
+.portfolio-navbar {
+    display: none;
+}
+}

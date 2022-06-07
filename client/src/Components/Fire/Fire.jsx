@@ -1,6 +1,5 @@
 import React from "react";
 import "./fire.css";
-import img from "../../Assets/media/introBackground.png";
 
 function Fire() {
   return (

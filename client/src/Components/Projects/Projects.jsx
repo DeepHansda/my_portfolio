@@ -1,15 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./projects.css";
-import Project from "../UI/WebAppUI/Project";
 import { Link, Routes, Route, Outlet } from "react-router-dom";
-import AndApp from "../UI/AndroidAppUI/AndApp";
-import { useDispatch, useSelector } from "react-redux";
-import { getProjects } from "../../Redux/Actions/projectActions";
 import { ProjectContext } from "../../App";
 
 function Projects() {
-  const [webapp, setWebapp] = useState("");
-  const projects = useContext(ProjectContext);
   return (
     <div className="projects">
       <div className="container-wrapper">
