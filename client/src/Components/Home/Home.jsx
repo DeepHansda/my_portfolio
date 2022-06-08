@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./home.css";
 // import video from "./ve.mp4";
 import { CircularProgressbar } from "react-circular-progressbar";
@@ -6,16 +6,19 @@ import "react-circular-progressbar/dist/styles.css";
 import { FiDownload } from "react-icons/fi";
 import { ProgressData } from "../../Data/ProgressData";
 import { Button } from "@mui/material";
+import { ProjectContext } from "../../App";
 function Home() {
   const percentage = 90;
- const [backValue,setBackValue] = useState([])
+//  const [backValue,setBackValue] = useState([])
 
-  window.addEventListener('scroll',()=>{
-    let value = window.scrollY
-    setBackValue(value*-0.3)
-  })
+  // window.addEventListener('scroll',()=>{
+  //   let value = window.scrollY
+  //   setBackValue(value*-0.3)
+  // })
+  const data = useContext(ProjectContext)
+// console.log(data.offset)
   return (
-    <div className="home" style={{'backgroundPositionY': `${backValue}px`}}>
+    <div className="home" style={{ backgroundPositionY:`${data.offset* -0.2}px`}} >
       <div className="intro">
         <h1>Deep Hansda</h1>
         <p>
