@@ -1,7 +1,10 @@
 .fire {
-  background-image: linear-gradient( 134.6deg,  rgba(201,37,107,1) 15.4%, rgba(116,16,124,1) 74.7% );
+  /* background-image: url('./Loki_multiverse.png'); */
+  width: 100%;
+  /* background-position: center; */
+  /* background-size: cover; */
   padding: 25px 0px;
-  border-top: 1px solid rgb(225, 225, 225, 0.8);
+  border-bottom: 1px solid rgb(225, 225, 225, 0.4);
 }
 
 @keyframes introBackground {
@@ -26,11 +29,10 @@
 
 .fire-container .fire-card {
   width: 300px;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
   padding: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.103);
-  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
   overflow: visible;
 }

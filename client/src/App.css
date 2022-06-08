@@ -1,0 +1,42 @@
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App{
+  background-image: url('./pexels-frank-cone-3279307.jpg');
+  background-position: center;
+  background-repeat:repeat-y;
+  background-size: cover;
+  transition: all 0.3s ease ;
+  /* background */
+  /* animation: universalBackground 60s linear infinite; */
+
+
+  /* background-attachment: fixed; */
+}
+@keyframes universalBackground {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* @keyframes universalBackground {
+  0%{transform:rotate(0deg)}
+  100%{transform:rotate(360deg)}
+} */
+
+@media screen and (min-width: 1280px){
+    .App{
+  background-size: 200% 300%;
+
+    }
+}

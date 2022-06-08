@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./home.css";
 // import video from "./ve.mp4";
 import { CircularProgressbar } from "react-circular-progressbar";
@@ -8,17 +8,25 @@ import { ProgressData } from "../../Data/ProgressData";
 import { Button } from "@mui/material";
 function Home() {
   const percentage = 90;
+ const [backValue,setBackValue] = useState([])
+
+  window.addEventListener('scroll',()=>{
+    let value = window.scrollY
+    setBackValue(value*-0.3)
+  })
   return (
-    <div className="home">
+    <div className="home" style={{'backgroundPositionY': `${backValue}px`}}>
       <div className="intro">
         <h1>Deep Hansda</h1>
         <p>
           Full Stack Developer & Android Developer<span>--deep</span>
         </p>
         <div className="download-button">
+        <a href="https://drive.google.com/file/d/1PwbEa3E2byxMcFoTtsTA49QvVQXXeZUG/view?usp=sharing" target="_blank">
           <Button variant="contained" color="secondary">
             Download Portfolio
           </Button>
+          </a>
         </div>
       </div>
 

@@ -12,11 +12,18 @@ export const ProjectContext = createContext();
 function App() {
 const [openSideBar,setOpenSideBar] = useState(false)
  const dispatch = useDispatch()
+ const [backValue,setBackValue] = useState([])
+//  let backValue = window.scrollY;
 
   useEffect(()=>{
     dispatch(getProjects())
   },[])
 
+  
+  window.addEventListener('scroll',()=>{
+    let value = window.scrollY
+    setBackValue(value*-0.3)
+  })
   const projects = useSelector((state)=>{return state.projects})
   const states ={
     projects: projects,
@@ -24,7 +31,7 @@ const [openSideBar,setOpenSideBar] = useState(false)
   }
   return (
     <ProjectContext.Provider value={states}>
-      <div className="App" style={{ "overflowX": "hidden" }}>
+      <div className="App" style={{ "overflowX": "hidden" ,"backgroundPositionY": `${backValue}px`}}>
         <Navbar openSideBar={openSideBar} setOpenSideBar={setOpenSideBar}/>
         <Sidebar openSideBar={openSideBar} setOpenSideBar={setOpenSideBar}/>
         <ContactBar />

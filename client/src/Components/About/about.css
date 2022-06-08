@@ -1,5 +1,5 @@
 .about {
-  background: linear-gradient(270deg, #fc466b, #3f5efb);
+  /* background: linear-gradient(270deg, #fc466b, #3f5efb); */
   background-size: 400% 400%;
   animation: aboutBackground 26s ease infinite;
   height: 100%;
@@ -87,8 +87,8 @@
 }
 
 .steps-container .content {
-  padding: 32px;
-  background-color: rgba(255, 255, 255, 0.2);
+  padding: 38px;
+  background-color: rgba(225, 225, 225, 0.05);
   backdrop-filter: blur(10px);
   position: relative;
   /* border-radius: 0px 0px 80px 0px; */
@@ -122,7 +122,7 @@
   margin-bottom: 10px;
   width: 62px;
   height: 62px;
-  background-color: #d53dff;
+  background-color: rgba(218, 10, 255, 0.9);
   border-radius: 50%;
   flex-shrink: 0;
   align-items: center;
@@ -153,6 +153,9 @@
     flex-direction: row-reverse;
     width: auto;
     margin-bottom: 16px;
+  }
+  .steps-container .content{
+    padding:18px;
   }
   .steps .steps-container:nth-child(even) {
     left: 0;

@@ -9,13 +9,14 @@ button, input {
   .background {
     display: flex;
     min-height: 100vh;
-    font-size: 12px;
-    background: linear-gradient(240deg, #833ab4, #fd1d1d, #fcb045);
+    /* background: linear-gradient(240deg, #833ab4, #fd1d1d, #fcb045); */
     background-size: 600% 600%;
 
     -webkit-animation: contactBackground 9s ease infinite;
     -moz-animation: contactBackground 9s ease infinite;
     animation: contactBackground 9s ease infinite;
+    justify-content: center;
+    align-items: center;
   }
   
   .container {
@@ -26,10 +27,10 @@ button, input {
   
   .screen {
     position: relative;
-    background: rgba(225, 225, 225, 0.3);
+    background-color: rgba(225, 225, 225, 0.05);
     backdrop-filter: blur(10px);
     border-radius: 15px;
-    border:1px solid rgba(225, 225, 225, 0.02)
+    border:1px solid rgba(225, 225, 225, 0.05)
   }
   
   .screen:after {

@@ -2,9 +2,8 @@ const { mailService } = require("../services/contact.service");
 const ContactModel = require("../db/models/contacts.model");
 module.exports = {
   createContact: async (req, res) => {
-    const { id, fullName, email, contactNumber, message } = req.body;
+    const { fullName, email, contactNumber, message } = req.body;
     const data = {
-      id: id,
       fullName: fullName,
       email: email,
       contactNumber: contactNumber,

@@ -1,25 +1,88 @@
 import React, { useState } from "react";
-import { Container, TextField, CircularProgress, Button } from "@mui/material";
+import {
+  Container,
+  TextField,
+  CircularProgress,
+  Button,
+  Snackbar,
+  Alert,
+  Fade,
+} from "@mui/material";
 // import "./form.css";
+import { useDispatch, useSelector } from "react-redux";
+import { createContact } from "../../../Redux/Actions/contactActions";
 export default function Form() {
   const [fullName, setFullName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-
+  const [progress, setProgress] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [dis, setDis] = useState(false);
+  const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
     console.log("hello");
-    // const data = {
-    //   fullName: fullName,
-    //   email: email,
-    //   contactNumber: contactNumber,
-    //   message: message,
-    // };
+    const data = {
+      fullName: fullName,
+      email: email,
+      contactNumber: contactNumber,
+      message: message,
+    };
+    setProgress(true);
+    dispatch(createContact(data))
+      .then((res) => {
+        if (res.success === 1) {
+          setProgress(false);
+          setOpen(true);
+          setDis(true);
+        } else if (res.success === 0) {
+          setProgress(false);
+          setOpen(true);
+          setDis(false);
+          console.log(res.error);
+        } else {
+          setProgress(false);
+          setOpen(true);
+          setDis(false);
+        }
+      })
+      .catch((err) => {
+        setProgress(false);
+        setOpen(true);
+        setDis(false);
+        console.log(err);
+      });
+  };
+  // const data = useSelector(state=>state.contacts)
+  // console.log(data)
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
   };
 
   return (
     <div className="from-component">
+      <Snackbar
+        TransitionComponent={Fade}
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleClose}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
+        <Alert
+          variant="filled"
+          onClose={handleClose}
+          severity={dis ? "success" : "error"}
+          sx={{ width: "100%" }}
+        >
+          {dis ? "Message Sent !" : "Message Failed !"}
+        </Alert>
+      </Snackbar>
       <form onSubmit={submitHandler}>
         <Container>
           <TextField
@@ -38,6 +101,9 @@ export default function Form() {
               fieldset: {
                 borderColor: "rgba(255, 255, 255, 0.4)",
               },
+              input:{
+                color: 'primary.main'
+              }
             }}
           />
           <TextField
@@ -57,6 +123,10 @@ export default function Form() {
               fieldset: {
                 borderColor: "rgba(255, 255, 255, 0.4)",
               },
+              input:{
+                color: 'primary.main'
+              }
+              
             }}
           />
           <TextField
@@ -77,6 +147,9 @@ export default function Form() {
               fieldset: {
                 borderColor: "rgba(255, 255, 255, 0.4)",
               },
+              input:{
+                color: 'primary.main'
+              }
             }}
           />
           <TextField
@@ -96,6 +169,9 @@ export default function Form() {
               fieldset: {
                 borderColor: "rgba(255, 255, 255, 0.4)",
               },
+              textarea:{
+                color: 'primary.main'
+              }
             }}
           />
           <div
@@ -110,7 +186,7 @@ export default function Form() {
             >
               Submit
             </Button>
-            <CircularProgress color="secondary" size="30px" />
+            {progress && <CircularProgress color="secondary" size="30px" />}
           </div>
         </Container>
       </form>
