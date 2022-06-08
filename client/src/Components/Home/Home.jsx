@@ -8,17 +8,11 @@ import { ProgressData } from "../../Data/ProgressData";
 import { Button } from "@mui/material";
 import { ProjectContext } from "../../App";
 function Home() {
-  const percentage = 90;
-//  const [backValue,setBackValue] = useState([])
-
-  // window.addEventListener('scroll',()=>{
-  //   let value = window.scrollY
-  //   setBackValue(value*-0.3)
-  // })
   const data = useContext(ProjectContext)
-// console.log(data.offset)
+
+  
   return (
-    <div className="home" style={{ backgroundPositionY:`${data.offset* -0.2}px`}} >
+    <div className="home" >
       <div className="intro">
         <h1>Deep Hansda</h1>
         <p>
@@ -47,7 +41,7 @@ function Home() {
                     // Customize the path, i.e. the "completed progress"
                     path: {
                       // Path color
-                      stroke: `rgba(218, 10, 255, ${percentage / 100})`,
+                      stroke: `rgba(218, 10, 255, ${data.percent / 100})`,
                       // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
                       strokeLinecap: "round",
                       // Customize transition animation

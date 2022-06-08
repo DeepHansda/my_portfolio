@@ -7,17 +7,19 @@ import MyRoutes from "./Util/MyRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import { getProjects } from "./Redux/Actions/projectActions";
 import axios from "axios";
+import img from "./pexels-frank-cone-3279307.jpg"
 
 export const ProjectContext = createContext();
 function App() {
 const [openSideBar,setOpenSideBar] = useState(false)
  const dispatch = useDispatch()
  const [offset, setOffset] = useState(0)
-//  let backValue = window.scrollY;
 
   useEffect(()=>{
     dispatch(getProjects())
   },[])
+
+
 
   useEffect(()=>{
     function handleScroll() {
@@ -31,10 +33,7 @@ const [openSideBar,setOpenSideBar] = useState(false)
     }
   },[])
   
-  // window.addEventListener('scroll',()=>{
-  //   let value = window.scrollY
-  //   setBackValue(value*-0.3)
-  // })
+
   const projects = useSelector((state)=>{return state.projects})
   const states ={
     projects: projects,
@@ -43,7 +42,11 @@ const [openSideBar,setOpenSideBar] = useState(false)
   }
   return (
     <ProjectContext.Provider value={states}>
-      <div className="App" style={{ "overflowX": "hidden",backgroundPositionY:`${offset*-0.5}px` }}>
+      
+      <div className="App" style={{ "overflowX": "hidden"}}>
+      <div className="universalBackground">
+        <img src={img} alt='background' style={{transform: `translateY(${offset * -0.5}px)`}}/>
+      </div>
         <Navbar openSideBar={openSideBar} setOpenSideBar={setOpenSideBar}/>
         <Sidebar openSideBar={openSideBar} setOpenSideBar={setOpenSideBar}/>
         <ContactBar />
