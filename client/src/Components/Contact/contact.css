@@ -9,12 +9,6 @@ button, input {
   .background {
     display: flex;
     min-height: 100vh;
-    /* background: linear-gradient(240deg, #833ab4, #fd1d1d, #fcb045); */
-    background-size: 600% 600%;
-
-    -webkit-animation: contactBackground 9s ease infinite;
-    -moz-animation: contactBackground 9s ease infinite;
-    animation: contactBackground 9s ease infinite;
     justify-content: center;
     align-items: center;
   }
@@ -69,17 +63,6 @@ button, input {
     background: white;
   }
   
-  .screen-header-button.close {
-    background: #ed1c6f;
-  }
-  
-  .screen-header-button.maximize {
-    background: #e8e925;
-  }
-  
-  .screen-header-button.minimize {
-    background: #74c54f;
-  }
   
   .screen-header-right {
     display: flex;
@@ -243,18 +226,3 @@ button, input {
     }
   }
  
-@-webkit-keyframes contactBackground {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-@-moz-keyframes contactBackground {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-@keyframes contactBackground {
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}

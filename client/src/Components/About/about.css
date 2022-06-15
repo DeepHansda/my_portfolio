@@ -1,9 +1,6 @@
 .about {
-  /* background: linear-gradient(270deg, #fc466b, #3f5efb); */
-  background-size: 400% 400%;
-  animation: aboutBackground 26s ease infinite;
-  height: 100%;
-  font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif;
+    width: 100%;
 }
 
 .about .about-text {
@@ -22,17 +19,7 @@
   max-width: 700px;
   color: rgba(255, 255, 255, 0.7);
 }
-@keyframes aboutBackground {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
+
 .section-header {
   text-align: center;
 }

@@ -9,7 +9,7 @@
   font-family: "Poppins", sans-serif;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
-  transition: all 0.4s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 .side-container {
   display: flex;

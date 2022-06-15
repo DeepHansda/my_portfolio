@@ -23,7 +23,8 @@ export function WebSection() {
 }
 
 export function AndroidSection() {
-  const data = useContext(ProjectContext);
+  const states = useContext(ProjectContext);
+  const data = states.projects
   const projects = data.filter((pro) => {
     return pro.type === "androidApp";
   });

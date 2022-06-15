@@ -1,46 +1,66 @@
 .home {
   width: 100vw;
   height: 100vh;
-  background-image: url("./spider65.jpg");
+  /* background-image: url("./spider65.jpg");
   background-attachment: fixed;
   background-size: cover;
   background-position: center;
-  background-repeat: none;
+  background-repeat: none; */
+  position: relative;
+}
+.home-background {
+  position: absolute;
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+  /* z-index:; */
+}
+.home-background img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+}
+.home-container {
+  width: 100%;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: row-reverse;
   padding: 10px;
-  transition: all 0.2s linear ;
-
+  transition: all 0.2s linear;
+}
+.intro {
+  width: fit-content;
+  margin-left: 10%;
+  z-index: 100;
 }
 
-.intro {
-  /* text-align: center; */
-  /* padding:10px; */
+.home-intro-text {
   font-family: "Poppins", sans-serif;
   color: #fff;
   width: 100%;
   height: 100%;
-  margin-left: 40px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  text-align: left;
 }
-
-.intro h1 {
-  /* width: 100%; */
-  font-size: 3.5em;
-  line-height: 50px;
-  overflow: hidden;
+.home-intro-text h2 {
+  font-size: 4em;
+  line-height: 1;
+}
+.home-intro-text p {
+  text-transform: capitalize;
+  padding: 30px 0;
 }
 
 .progress-bars {
   width: 55px;
   margin-left: 10px;
-  padding: 10px 0;
+  padding: 20px 0;
+  z-index: 100;
+
 }
-.progress-bar-container{
+.progress-bar-container {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -52,101 +72,94 @@
   flex-direction: column;
   /* margin: 14px 0px; */
   align-items: center;
+  font-family: "Poppins", sans-serif;
 }
 
-.progress-name{
-  font-family: "Poppins",sans-serif;
-  margin-top:5px;
+.progress-name {
+  font-family: "Poppins", sans-serif;
+  margin-top: 5px;
   color: #fff;
-  font-weight:lighter;
-  text-transform:capitalize;
+  font-weight: lighter;
+  text-transform: capitalize;
   font-size: 15px;
 }
 
 .download-button {
-  display: flex;
-  margin-top: 40px;
-  padding: 10px;
+  width: fit-content;
+  padding: 10px 0;
+  /* margin:10px 0px; */
   border-bottom: 0.5px solid #fff;
-}
-.download-button p {
-  font-family: "Merriweather Sans", sans-serif;
-  font-weight: lighter;
-  color: #fff;
-  font-size: 1em;
-  text-transform: capitalize;
-  padding: 0px 8px;
-  border-left: 5px solid #fff;
-}
-.download-button span {
-  font-size: 14px;
 }
 
 @media screen and (min-width: 600px) {
+  .home-container {
+    justify-content: space-between;
+  }
+
   .progress-bars {
     width: 12%;
   }
-  .intro h1 {
-    font-size: 10vw;
-    line-height: none;
-    height: 75px;
-    padding: 10px;
+  .home-intro-text h2 {
+    font-size: 16vw;
   }
   .progress-bar-container li {
     width: 60px;
   }
 }
 
-@media screen and (min-width: 800px) {
-  .intro h1{
-    height: 115px;
-
-  }
-}
-
 @media screen and (min-width: 1024px) {
-.intro {
-  height: auto;
-  align-items: center;
-
-}
-  .home {
+  .home-container,
+  .intro {
     flex-direction: column;
-  }
-  .progress-bars {
-    width: 100%;
-    margin-top: 50px;;
-
-
-  }
-  .progress-bar-container {
-    width: 100%;
-    height:auto;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
   }
+  .intro {
+    display: flex;
+    margin: 0;
+  }
+  .home-intro-text {
+    text-align: center;
+  }
+  .progress-bars {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: fit-content;
+    margin-top: 45px;
+  }
+  .home-intro-text h2 {
+    font-size: 8em;
+  }
+
+  .progress-bar-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    /* height: 100vh; */
+    height: fit-content;
+    padding: 0 85px;
+  }
   .progress-bar-container li {
-    margin: 0px 14px;
     width: 80px;
   }
 }
 
 @media screen and (min-width: 1280px) {
-  
+  .intro {
+    margin-top:10px
+  }
+  .progress-bars {
+    width: 1024px;;
+  }
   .progress-bar-container {
     flex-direction: row;
   }
-
-  .intro {
-    height: auto;
+  .home-intro-text h2 {
+    font-size: 12em;
   }
-  .intro h1 {
-    font-size: 120px;
-    padding: 112px;
-  }
-  .download-button {
-    margin-top: 0;
+  .home-intro-text p{
+    padding: 0
   }
   
 }

@@ -4,9 +4,20 @@ import { Link } from "react-router-dom";
 import SocialContactBar from "../UI/ContactBar/ContactBar";
 import { FiX } from "react-icons/fi";
 function Sidebar({openSideBar,setOpenSideBar}) {
+  const [screen,setScreen] = useState(window.innerWidth);
+  useEffect(()=>{
+    function handleSize() {
+    setScreen(window.innerWidth)
+     
+    }
+    window.addEventListener("resize", handleSize)
+    return()=>{
+      window.removeEventListener("resize", handleSize)
+    }
+  },[])
     // const [close,setClose] = useState(false);
   return (
-    <div className="sidebar" style={{left: window.innerWidth < 1280 ?  openSideBar ? '0' : '-100%' : '0'}}>
+    <div className="sidebar" style={{left: screen < 1280 ?  openSideBar ? '0' : '-100%' : '0'}}>
       <div className="sidebar-close-button" onClick={()=>{setOpenSideBar(false)}}>
         <p>
           <FiX />
