@@ -17,15 +17,13 @@ var readHTMLFile = function (path, callback) {
 };
 
 const mailService = (data, callback) => {
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
+  var transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
-      type: "OAuth2",
-      user: process.env.MAIL_USERNAME,
-      pass: process.env.MAIL_PASSWORD,
-      clientId: process.env.OAUTH_CLIENTID,
-      clientSecret: process.env.OAUTH_CLIENT_SECRET,
-      refreshToken: process.env.OAUTH_REFRESH_TOKEN,
+      user:process.env.MAIL_USERNAME,
+      pass:process.env.MAIL_PASSWORD,
     },
   });
 
@@ -41,9 +39,9 @@ const mailService = (data, callback) => {
       };
       const htmlToSend = template(replacement);
       let mailOptions = {
-        from: process.env.MAIL_USERNAME,
-        to: [data.email, process.env.MAIL_USERNAME],
-        subject: "TRIODEL",
+        from: `Deep Hansda <${process.env.MAIL_USERNAME}>`,
+        to: data.email,
+        subject: "Message From Deep hansda",
         html: htmlToSend,
       };
 
