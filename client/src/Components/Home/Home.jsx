@@ -14,7 +14,7 @@ function Home() {
   return (
     <div className="home">
       <div className="home-background">
-        <img src={ud} alt="" style={{transform: `translateY(${offset * 0.2}px)`}}/>
+        <img src={ud} alt="" style={{transform: `translateY(${offset * 0.4}px)`}}/>
       </div>
       <div className="home-container">
         <div className="intro">

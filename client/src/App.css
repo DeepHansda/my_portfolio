@@ -15,7 +15,8 @@
 .App{
   transition: all 0.2s  ease-in;
   position: relative;
-  background-image: url('./pexels-frank-cone-3279307.jpg');
+  /* background-image: url('./pexels-frank-cone-3279307.jpg'); */
+  background-color: black;
   background-repeat:repeat-y;
   background-position: center;
   background-size:cover;
