@@ -44,6 +44,9 @@ const [openSideBar,setOpenSideBar] = useState(false)
     <ProjectContext.Provider value={states}>
       
       <div className="App" style={{ "overflowX": "hidden"}}>
+      <div className="universalBackground">
+        <img src={img} alt='background' style={{transform: `translateY(${offset * 0.4}px)`}}/>
+      </div>
         <Navbar openSideBar={openSideBar} setOpenSideBar={setOpenSideBar}/>
         <Sidebar openSideBar={openSideBar} setOpenSideBar={setOpenSideBar}/>
         <ContactBar />

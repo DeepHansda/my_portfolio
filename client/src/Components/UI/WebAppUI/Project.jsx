@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./project.css";
 import WebSlider from "./WebSlider";
-import {FiGithub, FiGlobe} from "react-icons/fi";
+import { FiGithub, FiGlobe } from "react-icons/fi";
+import { useState } from "react";
 function Project({ project }) {
+
+  const [screen, setScreen] = useState(window.innerWidth);
+  useEffect(() => {
+    function handleSize() {
+      setScreen(window.innerWidth);
+    }
+    window.addEventListener("resize", handleSize);
+    return () => {
+      window.removeEventListener("resize", handleSize);
+    };
+  }, []);
+
   return (
     <div className="project">
       <div className="project-cover">
-        <WebSlider images={project.project_img} />
+        {screen > 1024 ? 
+        <WebSlider images={project.project_img} />:
+        <div className="project-img">
+          <img src={project.project_img[0].img} alt="" />
+        </div>
+}
         <div className="project-info">
           <div className="project-text">
             <div className="project-text-title">
@@ -43,13 +61,17 @@ function Project({ project }) {
           <div className="web-button-container">
             <div className="project-button">
               <a href={project.visit_link}>
-                <div className="visit-button"><FiGlobe/> visit</div>
+                <div className="visit-button">
+                  <FiGlobe /> visit
+                </div>
               </a>
             </div>
 
             <div className="project-button">
               <a href={project.git_link}>
-                <div className="visit-button"><FiGithub/> Git Repo</div>
+                <div className="visit-button">
+                  <FiGithub /> Git Repo
+                </div>
               </a>
             </div>
           </div>

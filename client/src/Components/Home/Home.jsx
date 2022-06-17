@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext} from "react";
 import "./home.css";
-// import video from "./ve.mp4";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { FiDownload } from "react-icons/fi";
 import { ProgressData } from "../../Data/ProgressData";
-import { Button } from "@mui/material";
 import { ProjectContext } from "../../App";
 import ud from './spider65.jpg'
 function Home() {
@@ -14,7 +12,7 @@ function Home() {
   return (
     <div className="home">
       <div className="home-background">
-        <img src={ud} alt="" style={{transform: `translateY(${offset * 0.4}px)`}}/>
+        <img src={ud} alt="" style={{transform: `translateY(${offset * 0.3}px)`}}/>
       </div>
       <div className="home-container">
         <div className="intro">
@@ -30,9 +28,9 @@ function Home() {
               href="https://drive.google.com/file/d/1PwbEa3E2byxMcFoTtsTA49QvVQXXeZUG/view?usp=sharing"
               target="_blank"
             >
-              <Button variant="contained" color="secondary">
+              <button>
                 Download Portfolio
-              </Button>
+              </button>
             </a>
           </div>
         </div>

@@ -6,8 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 function WebSlider({ images }) {
 
   var settings = {
-    // dots: true,
-    // className: "",
     lazyLoad: true,
     infinite: true,
     speed: 2000,
@@ -15,38 +13,9 @@ function WebSlider({ images }) {
     slidesToScroll: 1,
     initialSlide: 1,
     autoplay: true,
-    fade: true,
-    autoplaySpeed: 6000,
+    autoplaySpeed: 3000,
     adaptiveHeight: true,
     arrows: false,
-
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
   };
 
   return (

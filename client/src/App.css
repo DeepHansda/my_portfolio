@@ -16,10 +16,21 @@
   transition: all 0.2s  ease-in;
   position: relative;
   /* background-image: url('./pexels-frank-cone-3279307.jpg'); */
-  background-color: black;
+  /* background-color: black; */
   background-repeat:repeat-y;
   background-position: center;
   background-size:cover;
   background-attachment: fixed;
 
 }
+.universalBackground{
+  position: absolute;
+  z-index: -1000;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.universalBackground img{
+  width: 100%;
+  height:100%;
+  object-fit: cover;}
