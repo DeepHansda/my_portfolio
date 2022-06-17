@@ -1,17 +1,12 @@
 import React, { useState } from "react";
 import {
-  Container,
-  TextField,
-  CircularProgress,
-  Button,
   Snackbar,
   Alert,
   Fade,
   ThemeProvider,
-  SnackbarContent,
-  AlertTitle,
+  CircularProgress,
 } from "@mui/material";
-// import "./form.css";
+import "./form.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createContact } from "../../../Redux/Actions/contactActions";
 import { theme } from "../../../Util/customTheme";
@@ -73,61 +68,99 @@ export default function Form() {
   return (
     <ThemeProvider theme={theme}>
       <div className="from-component">
-        <SnackbarContent
+        <Snackbar
           TransitionComponent={Fade}
           open={open}
           autoHideDuration={6000}
           onClose={handleClose}
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
         >
-          <AlertTitle
+          <Alert
             variant="filled"
             onClose={handleClose}
             severity={dis ? "success" : "error"}
             sx={{ width: "100%" }}
           >
             {dis ? "Message Sent !" : "Message Failed !"}
-          </AlertTitle>
-        </SnackbarContent>
+          </Alert>
+        </Snackbar>
         <form onSubmit={submitHandler}>
-          <div class="center">
-            <div class="container">
-              <div class="card">
-                <h1 class="card_title">Login to your account</h1>
-                <p class="card_title-info">Pen By Anna Batura</p>
-                <div class="input">
-                  <input type="text" class="input_field" required />
-                  <label class="input_label">Full name</label>
-                </div>
-                <div class="input">
-                  <input type="text" class="input_field" required />
-                  <label class="input_label">Email</label>
-                </div>
-                <div class="input">
-                  <input type="password" class="input_field" required />
-                  <label class="input_label">Password</label>
-                  <span class="input_eye">
-                    <svg
-                      viewBox="0 0 146 74"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M143 37C143 45.4902 136.139 53.9606 123.263 60.487C110.554 66.9283 92.7879 71 73 71C53.2121 71 35.446 66.9283 22.7375 60.487C9.86096 53.9606 3 45.4902 3 37C3 28.5098 9.86096 20.0394 22.7375 13.513C35.446 7.07167 53.2121 3 73 3C92.7879 3 110.554 7.07167 123.263 13.513C136.139 20.0394 143 28.5098 143 37Z"
-                        stroke-width="6"
-                      />
-                      <circle cx="73" cy="37" r="34" stroke-width="6" />
-                    </svg>
-                  </span>
-                </div>
-                <button class="card_button">Get started</button>
-                <div class="card_info">
-                  <p>
-                    Not registered? <a href="#">Create an account</a>
-                  </p>
-                </div>
-              </div>
+          <div class="form">
+            {progress && <CircularProgress />}
+            <div class="input-container ic1">
+              <input
+                id="firstname"
+                class="input"
+                type="text"
+                placeholder=" "
+                required
+                value={fullName}
+                onChange={(e) => {
+                  setFullName(e.target.value);
+                }}
+              />
+              <div class="cut"></div>
+              <label for="firstname" class="placeholder">
+                Full Name
+              </label>
             </div>
+            <div class="input-container ic2">
+              <input
+                id="lastname"
+                class="input"
+                type="email"
+                placeholder=" "
+                required
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              <div class="cut"></div>
+              <label for="lastname" class="placeholder">
+                Email
+              </label>
+            </div>
+            <div class="input-container ic2">
+              <input
+                id="phone"
+                class="input"
+                type="number"
+                placeholder=" "
+                required
+                value={contactNumber}
+                onChange={(e) => {
+                  setContactNumber(e.target.value);
+                }}
+              />
+              <div class="cut cut-short"></div>
+              <label for="email" class="placeholder">
+                Mobile Number
+              </label>
+            </div>
+
+            <div
+              class="input-container ic2"
+              style={{ width: "100%", height: "150px" }}
+            >
+              <textarea
+                id="message"
+                class="input"
+                placeholder=" "
+                required
+                value={message}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+              ></textarea>
+              <div class="cut cut-short"></div>
+              <label for="email" class="placeholder">
+                Message
+              </label>
+            </div>
+            <button type="text" class="submit">
+              submit
+            </button>
           </div>
         </form>
       </div>
