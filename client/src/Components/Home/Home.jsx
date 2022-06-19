@@ -1,18 +1,37 @@
-import React, { useContext} from "react";
+import React, { useContext, useEffect } from "react";
 import "./home.css";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { FiDownload } from "react-icons/fi";
 import { ProgressData } from "../../Data/ProgressData";
 import { ProjectContext } from "../../App";
-import ud from './spider65.jpg'
+import ud from "./spider65.jpg";
+import { useState } from "react";
 function Home() {
   const data = useContext(ProjectContext);
-  const offset = data.offset
+  const offset = data.offset;
+  const [screen, setScreen] = useState(window.innerWidth);
+  useEffect(() => {
+    function handleSize() {
+      setScreen(window.innerWidth);
+    }
+    window.addEventListener("resize", handleSize);
+    return () => {
+      window.removeEventListener("resize", handleSize);
+    };
+  }, []);
   return (
     <div className="home">
       <div className="home-background">
-        <img src={ud} alt="" style={{transform: `translateY(${offset * 0.3}px)`}}/>
+        <img
+          src={ud}
+          alt=""
+          style={{
+            transform: `${
+              screen < 834 ? "none" : `translateY(${offset * 0.4}px)`
+            }`,
+          }}
+        />
       </div>
       <div className="home-container">
         <div className="intro">
@@ -28,9 +47,10 @@ function Home() {
               href="https://drive.google.com/file/d/1PwbEa3E2byxMcFoTtsTA49QvVQXXeZUG/view?usp=sharing"
               target="_blank"
             >
-              <button>
-                Download Portfolio
-              </button>
+              <p>
+                <FiDownload />
+              </p>
+              <button>Download Portfolio</button>
             </a>
           </div>
         </div>

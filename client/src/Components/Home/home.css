@@ -35,6 +35,7 @@
   width: fit-content;
   margin-left: 10%;
   z-index: 100;
+  font-family: "Poppins", sans-serif;
 }
 
 .home-intro-text {
@@ -58,7 +59,6 @@
   margin-left: 10px;
   padding: 20px 0;
   z-index: 100;
-
 }
 .progress-bar-container {
   display: flex;
@@ -83,12 +83,29 @@
   text-transform: capitalize;
   font-size: 15px;
 }
-
 .download-button {
+  margin-top: 10px;
+}
+.download-button a {
+  padding: 10px 5px;
+  background-color: #fff;
   width: fit-content;
-  padding: 10px 0;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  font-size: 16px;
+}
+.download-button a p {
+  color: #000;
+}
+.download-button button {
+  width: fit-content;
   /* margin:10px 0px; */
+  margin-left: 5px;
   border-bottom: 0.5px solid #fff;
+  cursor: pointer;
+  border: none;
+  background: transparent;
 }
 
 @media screen and (min-width: 600px) {
@@ -147,10 +164,10 @@
 
 @media screen and (min-width: 1280px) {
   .intro {
-    margin-top:10px
+    margin-top: 10px;
   }
   .progress-bars {
-    width: 1024px;;
+    width: 1024px;
   }
   .progress-bar-container {
     flex-direction: row;
@@ -158,8 +175,7 @@
   .home-intro-text h2 {
     font-size: 12em;
   }
-  .home-intro-text p{
-    padding: 0
+  .home-intro-text p {
+    padding: 0;
   }
-  
 }

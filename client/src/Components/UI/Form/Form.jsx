@@ -3,13 +3,11 @@ import {
   Snackbar,
   Alert,
   Fade,
-  ThemeProvider,
   CircularProgress,
 } from "@mui/material";
 import "./form.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createContact } from "../../../Redux/Actions/contactActions";
-import { theme } from "../../../Util/customTheme";
 
 export default function Form() {
   const [fullName, setFullName] = useState("");
@@ -66,7 +64,6 @@ export default function Form() {
   };
 
   return (
-    <ThemeProvider theme={theme}>
       <div className="from-component">
         <Snackbar
           TransitionComponent={Fade}
@@ -85,12 +82,12 @@ export default function Form() {
           </Alert>
         </Snackbar>
         <form onSubmit={submitHandler}>
-          <div class="form">
+          <div className="form">
             {progress && <CircularProgress />}
-            <div class="input-container ic1">
+            <div className="input-container ic1">
               <input
                 id="firstname"
-                class="input"
+                className="input"
                 type="text"
                 placeholder=" "
                 required
@@ -99,15 +96,15 @@ export default function Form() {
                   setFullName(e.target.value);
                 }}
               />
-              <div class="cut"></div>
-              <label for="firstname" class="placeholder">
+              <div className="cut"></div>
+              <label for="firstname" className="placeholder">
                 Full Name
               </label>
             </div>
-            <div class="input-container ic2">
+            <div className="input-container ic2">
               <input
                 id="lastname"
-                class="input"
+                className="input"
                 type="email"
                 placeholder=" "
                 required
@@ -116,15 +113,15 @@ export default function Form() {
                   setEmail(e.target.value);
                 }}
               />
-              <div class="cut"></div>
-              <label for="lastname" class="placeholder">
+              <div className="cut"></div>
+              <label for="lastname" className="placeholder">
                 Email
               </label>
             </div>
-            <div class="input-container ic2">
+            <div className="input-container ic2">
               <input
                 id="phone"
-                class="input"
+                className="input"
                 type="number"
                 placeholder=" "
                 required
@@ -133,19 +130,19 @@ export default function Form() {
                   setContactNumber(e.target.value);
                 }}
               />
-              <div class="cut cut-short"></div>
-              <label for="email" class="placeholder">
+              <div className="cut cut-short"></div>
+              <label for="email" className="placeholder">
                 Mobile Number
               </label>
             </div>
 
             <div
-              class="input-container ic2"
+              className="input-container ic2"
               style={{ width: "100%", height: "150px" }}
             >
               <textarea
                 id="message"
-                class="input"
+                className="input"
                 placeholder=" "
                 required
                 value={message}
@@ -153,17 +150,16 @@ export default function Form() {
                   setMessage(e.target.value);
                 }}
               ></textarea>
-              <div class="cut cut-short"></div>
-              <label for="email" class="placeholder">
+              <div className="cut cut-short"></div>
+              <label for="email" className="placeholder">
                 Message
               </label>
             </div>
-            <button type="text" class="submit">
+            <button type="text" className="submit">
               submit
             </button>
           </div>
         </form>
       </div>
-    </ThemeProvider>
   );
 }
