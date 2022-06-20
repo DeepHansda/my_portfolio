@@ -19,10 +19,12 @@ function About() {
 
         <div className="about-intro-myself">
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione
-            quia molestiae impedit aspernatur. Qui fuga voluptatem accusantium
-            esse cupiditate odit quaerat a quibusdam at eos incidunt ratione
-            minus, ex maxime eius laboriosam omnis, facere illo!
+            Hello ,<br /> My Name is Deep Hansda. Currently, I pursuing 3 Years
+            diploma course from Kanyapur Polytechnic - Asansol,India. My
+            interests are in MERN Full-Stack Web Development. I have extensive
+            knowledge of HTML, CSS, JavaScript, Node.js, ReactJS , MySQL and
+            GitHub. I love to create beautiful performant products with
+            delightful user experiences.
           </p>
         </div>
       </div>

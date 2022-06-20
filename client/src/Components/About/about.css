@@ -1,6 +1,6 @@
 .about {
-    font-family: "Poppins", sans-serif;
-    width: 100%;
+  font-family: "Poppins", sans-serif;
+  width: 100%;
 }
 
 .about .about-text {
@@ -141,13 +141,12 @@
     width: auto;
     margin-bottom: 16px;
   }
-  .steps-container .content{
-    padding:18px;
+  .steps-container .content {
+    padding: 18px;
   }
   .steps .steps-container:nth-child(even) {
     left: 0;
   }
-  
 }
 
 @media screen and (min-width: 1024px) {
@@ -158,11 +157,15 @@
     margin-left: 100px;
   }
   .emailNumber-container {
-    padding: 0 115px;
+    background-color: rgba(225, 225, 225, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    width: 768px;
+    margin: 0 auto;
   }
-  .about-social-wrapper-container{
-    width:700px;
-    margin:0 auto;
-
+  .about-social-wrapper-container {
+    width: 700px;
+    margin: 0 auto;
   }
 }

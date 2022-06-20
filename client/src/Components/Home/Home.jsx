@@ -1,12 +1,11 @@
-import React, { useContext, useEffect } from "react";
-import "./home.css";
+import { useContext, useEffect, useState } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { FiDownload } from "react-icons/fi";
-import { ProgressData } from "../../Data/ProgressData";
 import { ProjectContext } from "../../App";
+import { ProgressData } from "../../Data/ProgressData";
+import "./home.css";
 import ud from "./spider65.jpg";
-import { useState } from "react";
 function Home() {
   const data = useContext(ProjectContext);
   const offset = data.offset;
@@ -24,7 +23,7 @@ function Home() {
     <div className="home">
       <div className="home-background">
         <img
-          src={ud}
+          src={"https://res.cloudinary.com/manjiro/image/upload/v1655702305/portfolio_images/xor/fotis-fotopoulos-6sAl6aQ4OWI-unsplash_s50hcp.jpg"}
           alt=""
           style={{
             transform: `${
@@ -38,7 +37,15 @@ function Home() {
           <div className="home-intro-text">
             <h2>Deep Hansda</h2>
             <p>
-              Full Stack Developer & Android Developer<span>--deep</span>
+            "Be Water, My Friend.
+Empty your mind.
+Be formless, shapeless, like water.
+You put water into a cup, it becomes the cup.
+You put water into a bottle, it becomes the bottle.
+You put it into a teapot, it becomes the teapot.
+Now water can flow or it can crash.
+Be water, my friend."
+<br/><span>--Bruce Lee</span>
             </p>
           </div>
 
@@ -69,7 +76,7 @@ function Home() {
                       // Customize the path, i.e. the "completed progress"
                       path: {
                         // Path color
-                        stroke: `rgba(218, 10, 255, ${data.percent / 100})`,
+                        stroke: `rgba(225, 225, 255, ${data.percent / 100})`,
                         // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
                         strokeLinecap: "round",
                         // Customize transition animation
@@ -82,7 +89,7 @@ function Home() {
                       // Customize the circle behind the path, i.e. the "total progress"
                       trail: {
                         // Trail color
-                        stroke: "#fff",
+                        stroke: "#da0aff",
                         // Whether to use rounded or flat corners on the ends - can use 'butt' or 'round'
                         strokeLinecap: "butt",
                         // Rotate the trail
@@ -93,7 +100,7 @@ function Home() {
                       // Customize the text
                       text: {
                         // Text color
-                        fill: "#da0aff",
+                        fill: "#fff",
                         // Text size
                         fontSize: "16px",
                       },

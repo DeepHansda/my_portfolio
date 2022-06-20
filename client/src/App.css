@@ -1,4 +1,3 @@
-
 *,
 *:before,
 *:after {
@@ -12,25 +11,32 @@
   scroll-behavior: smooth;
 }
 
-.App{
-  transition: all 0.2s  ease-in;
+.App {
+  transition: all 0.2s ease-in;
   position: relative;
   /* background-image: url('./pexels-frank-cone-3279307.jpg'); */
   /* background-color: black; */
-  background-repeat:repeat-y;
+  background-repeat: repeat-y;
   background-position: center;
-  background-size:cover;
+  background-size: cover;
   background-attachment: fixed;
-
 }
-.universalBackground{
+.universalBackground {
   position: absolute;
   z-index: -1000;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
-.universalBackground img{
+.universalBackground img {
+  /* filter: blur(1px); */
   width: 100%;
-  height:100%;
-  object-fit: cover;}
+  height: 100%;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 768px){
+.universalBackground img {
+  filter: blur(2px);
+}
+}

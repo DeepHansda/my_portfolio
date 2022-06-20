@@ -1,13 +1,11 @@
-import React, { useEffect, createContext, useState } from "react";
-import "./App.css";
-import Sidebar from "./Components/Sidebar/Sidebar";
-import Navbar from "./Components/Navbar/Navbar";
-import ContactBar from "./Components/ContactSidebar/ContactBar";
-import MyRoutes from "./Util/MyRoutes";
+import { createContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import "./App.css";
+import ContactBar from "./Components/ContactSidebar/ContactBar";
+import Navbar from "./Components/Navbar/Navbar";
+import Sidebar from "./Components/Sidebar/Sidebar";
 import { getProjects } from "./Redux/Actions/projectActions";
-import axios from "axios";
-import img from "./pexels-frank-cone-3279307.jpg";
+import MyRoutes from "./Util/MyRoutes";
 
 export const ProjectContext = createContext();
 function App() {
@@ -57,7 +55,7 @@ function App() {
       <div className="App" style={{ overflowX: "hidden" }}>
         <div className="universalBackground">
           <img
-            src={img}
+            src={"https://res.cloudinary.com/manjiro/image/upload/v1655699821/portfolio_images/xor/Screenshot_2022-06-20_at_10-05-39_jquery_src_callbacks.js_at_main_jquery_jquery_dzcpdv.png"}
             alt="background"
             style={{
               transform: `${screen < 834 ? "none" : `translateY(${offset * 0.4 }px)`}`,
