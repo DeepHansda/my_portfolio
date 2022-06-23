@@ -12,14 +12,20 @@ export default function Resume() {
     <div className="resume">
       <div className="resume-container">
         <div className="resume-download-button">
-          <a href="https://drive.google.com/file/d/1PwbEa3E2byxMcFoTtsTA49QvVQXXeZUG/view?usp=sharing" target="_blank">
+          <a
+            href="https://drive.google.com/file/d/11dwhP0O4ymNtGXM5x7vOBTorNK2g_Oaj/view?usp=sharing"
+            target="_blank"
+          >
             <Button variant="contained" fullWidth color="secondary">
               Download Resume
             </Button>
           </a>
         </div>
+
         <iframe
-          src="https://drive.google.com/file/d/1PwbEa3E2byxMcFoTtsTA49QvVQXXeZUG/preview"
+          src="https://drive.google.com/file/d/11dwhP0O4ymNtGXM5x7vOBTorNK2g_Oaj/preview"
+          width="640"
+          height="480"
           allow="autoplay"
         ></iframe>
       </div>

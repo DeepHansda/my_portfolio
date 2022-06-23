@@ -5,7 +5,6 @@ import { FiDownload } from "react-icons/fi";
 import { ProjectContext } from "../../App";
 import { ProgressData } from "../../Data/ProgressData";
 import "./home.css";
-import ud from "./spider65.jpg";
 function Home() {
   const data = useContext(ProjectContext);
   const offset = data.offset;
@@ -23,7 +22,9 @@ function Home() {
     <div className="home">
       <div className="home-background">
         <img
-          src={"https://res.cloudinary.com/manjiro/image/upload/v1655702305/portfolio_images/xor/fotis-fotopoulos-6sAl6aQ4OWI-unsplash_s50hcp.jpg"}
+          src={
+            "https://res.cloudinary.com/manjiro/image/upload/v1655702305/portfolio_images/xor/fotis-fotopoulos-6sAl6aQ4OWI-unsplash_s50hcp.jpg"
+          }
           alt=""
           style={{
             transform: `${
@@ -37,21 +38,19 @@ function Home() {
           <div className="home-intro-text">
             <h2>Deep Hansda</h2>
             <p>
-            "Be Water, My Friend.
-Empty your mind.
-Be formless, shapeless, like water.
-You put water into a cup, it becomes the cup.
-You put water into a bottle, it becomes the bottle.
-You put it into a teapot, it becomes the teapot.
-Now water can flow or it can crash.
-Be water, my friend."
-<br/><span>--Bruce Lee</span>
+              "Be Water, My Friend. Empty your mind. Be formless, shapeless,
+              like water. You put water into a cup, it becomes the cup. You put
+              water into a bottle, it becomes the bottle. You put it into a
+              teapot, it becomes the teapot. Now water can flow or it can crash.
+              Be water, my friend."
+              <br />
+              <span>--Bruce Lee</span>
             </p>
           </div>
 
           <div className="download-button">
             <a
-              href="https://drive.google.com/file/d/1PwbEa3E2byxMcFoTtsTA49QvVQXXeZUG/view?usp=sharing"
+              href="https://drive.google.com/file/d/11dwhP0O4ymNtGXM5x7vOBTorNK2g_Oaj/view?usp=sharing"
               target="_blank"
             >
               <p>

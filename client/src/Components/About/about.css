@@ -130,6 +130,12 @@
 .emailNumber-container {
   padding: 0 20px;
 }
+.emailNumber-container .emailNumber{
+  background-color: rgba(225, 225, 225, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
 
 @media (max-width: 767px) {
   .steps::after {
@@ -157,10 +163,6 @@
     margin-left: 100px;
   }
   .emailNumber-container {
-    background-color: rgba(225, 225, 225, 0.05);
-    backdrop-filter: blur(10px);
-    border-radius: 5px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
     width: 768px;
     margin: 0 auto;
   }

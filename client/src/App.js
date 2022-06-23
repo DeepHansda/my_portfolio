@@ -6,6 +6,7 @@ import Navbar from "./Components/Navbar/Navbar";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import { getProjects } from "./Redux/Actions/projectActions";
 import MyRoutes from "./Util/MyRoutes";
+import back from "./background.png";
 
 export const ProjectContext = createContext();
 function App() {
@@ -30,18 +31,17 @@ function App() {
     };
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     function handleSize() {
-    setScreen(window.innerWidth)
-     
+      setScreen(window.innerWidth);
     }
-    window.addEventListener("resize", handleSize)
-    return()=>{
-      window.removeEventListener("resize", handleSize)
-    }
-  },[])
+    window.addEventListener("resize", handleSize);
+    return () => {
+      window.removeEventListener("resize", handleSize);
+    };
+  }, []);
 
-  console.log(screen)
+  console.log(screen);
   const projects = useSelector((state) => {
     return state.projects;
   });
@@ -55,10 +55,12 @@ function App() {
       <div className="App" style={{ overflowX: "hidden" }}>
         <div className="universalBackground">
           <img
-            src={"https://res.cloudinary.com/manjiro/image/upload/v1655699821/portfolio_images/xor/Screenshot_2022-06-20_at_10-05-39_jquery_src_callbacks.js_at_main_jquery_jquery_dzcpdv.png"}
+            src={back}
             alt="background"
             style={{
-              transform: `${screen < 834 ? "none" : `translateY(${offset * 0.4 }px)`}`,
+              transform: `${
+                screen < 834 ? "none" : `translateY(${offset * 0.4}px)`
+              }`,
             }}
           />
         </div>
