@@ -6,7 +6,6 @@ import Navbar from "./Components/Navbar/Navbar";
 import Sidebar from "./Components/Sidebar/Sidebar";
 import { getProjects } from "./Redux/Actions/projectActions";
 import MyRoutes from "./Util/MyRoutes";
-import back from "./background.png";
 
 export const ProjectContext = createContext();
 function App() {
@@ -55,7 +54,7 @@ function App() {
       <div className="App" style={{ overflowX: "hidden" }}>
         <div className="universalBackground">
           <img
-            src={back}
+            src={"https://res.cloudinary.com/manjiro/image/upload/v1657333328/portfolio_images/xor/background_uwvhvi.png"}
             alt="background"
             style={{
               transform: `${
