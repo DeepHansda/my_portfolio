@@ -2,7 +2,8 @@ import {
   Box,
   Button,
   Checkbox,
-  Container, FormControl,
+  Container,
+  FormControl,
   FormControlLabel,
   FormGroup,
   FormLabel,
@@ -10,12 +11,16 @@ import {
   Radio,
   RadioGroup,
   TextField,
-  Typography
+  Typography,
+  Snackbar,
+  IconButton,
+  Alert
 } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
+
 import axios from "axios";
 import React, { useContext, useState } from "react";
 import "./App.css";
-import { ProjectAPI } from "./index";
 import { techs } from "./utils/checkdata";
 const client = axios.create({
   baseURL: "https://portfolio-backend-deep-hansda0.herokuapp.com/api",
@@ -28,9 +33,9 @@ function App() {
   const [desc, setDesc] = useState("");
   const [checkedState, setCheckedState] = useState([]);
   const [visit, setVisit] = useState("");
-  const [git,setGit] = useState("");
-  const [duration,setDuration] = useState("")
-  const api = useContext(ProjectAPI);
+  const [git, setGit] = useState("");
+  const [duration, setDuration] = useState("");
+  const [open,setOpen] = useState(false);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -47,8 +52,8 @@ function App() {
     }
     // form.append("tech_list", checkedState);
     form.append("visit_link", visit);
-    form.append("git_link",git);
-    form.append("duration",duration);
+    form.append("git_link", git);
+    form.append("duration", duration);
 
     client
       .post("/uploadProject", form, {
@@ -58,9 +63,12 @@ function App() {
       })
       .then(function (response) {
         console.log(response);
+        setOpen(true)
       })
       .catch(function (error) {
         console.log(error);
+        setOpen(false)
+
       });
   };
 
@@ -93,8 +101,43 @@ function App() {
     setCheckedState(updatedList);
   };
 
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
+
+
+  const action = (
+    <React.Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
+
   return (
     <div className="App" style={{ "overflow-x": "hidden" }}>
+      <Snackbar
+        anchorOrigin={{vertical:'bottom',horizontal:'left'}}
+        open={open}
+        onClose={handleClose}
+        action={action}
+        autoHideDuration={5000}
+      >
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        Project Uploaded successfully 
+        </Alert>
+      </Snackbar>
       <form onSubmit={submitHandler} enctype="multipart/form-data">
         <Container maxWidth="sm">
           <Paper elevation={4}>
@@ -206,7 +249,7 @@ function App() {
                 onChange={(e) => setVisit(e.target.value)}
               />
 
-<TextField
+              <TextField
                 id="standard-basic"
                 label="Git Link"
                 fullWidth
