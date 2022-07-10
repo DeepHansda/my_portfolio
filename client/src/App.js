@@ -52,9 +52,14 @@ function App() {
   return (
     <ProjectContext.Provider value={states}>
       <div className="App" style={{ overflowX: "hidden" }}>
-        <div className="universalBackground">
+        <div
+          className="universalBackground"
+          style={{ display: screen < 600 ? "none" : "block" }}
+        >
           <img
-            src={"https://res.cloudinary.com/manjiro/image/upload/v1657333328/portfolio_images/xor/background_uwvhvi.png"}
+            src={
+              "https://res.cloudinary.com/manjiro/image/upload/v1657333328/portfolio_images/xor/background_uwvhvi.png"
+            }
             alt="background"
             style={{
               transform: `${
