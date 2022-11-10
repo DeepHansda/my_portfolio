@@ -23,7 +23,7 @@ import React, { useContext, useState } from "react";
 import "./App.css";
 import { techs } from "./utils/checkdata";
 const client = axios.create({
-  baseURL: "https://portfolio-backend-deep-hansda0.herokuapp.com/api",
+  baseURL: "https://my-portfolio-backend-deephansda.vercel.app/api",
 });
 
 function App() {
