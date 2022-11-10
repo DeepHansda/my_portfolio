@@ -16,6 +16,11 @@ function Project({ project }) {
     };
   }, []);
 
+  // const dom = new DOMParser()
+  // const desContent = dom.parseFromString("<p>hello world<p/>","text/html");
+  // console.log(desContent.body.firstChild.outerHTML)
+
+  const htmlString = `<div>${project.description}</div>`
   return (
     <div className="project">
       <div className="project-cover">
@@ -32,7 +37,8 @@ function Project({ project }) {
             </div>
 
             <div className="project-text-para">
-              <p>{project.description}</p>
+            <div dangerouslySetInnerHTML={{ __html: htmlString }} />
+            
             </div>
           </div>
 

@@ -3,6 +3,8 @@ import "./android.css";
 import AndroidSlider from "./AndroidSlider";
 import {FiGithub, FiGlobe} from "react-icons/fi";
 
+const htmlString = `<div>${project.description}</div>`
+
 function AndroidProject({ project }) {
   return (
     <div className="androidProject">
@@ -16,7 +18,8 @@ function AndroidProject({ project }) {
               <h2>{project.title}</h2>
             </div>
             <div className="android-project-para">
-              <p>{project.description}</p>
+            <div dangerouslySetInnerHTML={{ __html: htmlString }} />
+
             </div>
           </div>
           <div className="android-project-tech-container">

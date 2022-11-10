@@ -3,7 +3,7 @@ import { ProjectContext } from "../../App";
 import Project from "../UI/WebAppUI/Project";
 import AndroidProject from "../UI/androidProjectUI/AndroidProject";
 import "./cat.css";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Container, Typography } from "@mui/material";
 
 export function WebSection() {
   const { projects, loading } = useContext(ProjectContext);
@@ -16,14 +16,25 @@ export function WebSection() {
   return (
     <>
       {loading ? (
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <CircularProgress />
         </div>
       ) : (
         <div className="projects-container">
-          {projectsData.map((project, index) => {
-            return <Project project={project} key={project._id} />;
-          })}
+          {projects.length !== 0 ? (
+            projectsData.map((project, index) => {
+              return <Project project={project} key={project._id} />;
+            })
+          ) : (
+            <Typography>Projects are Empty!</Typography>
+          )}
         </div>
       )}
     </>
@@ -41,14 +52,25 @@ export function AndroidSection() {
   return (
     <>
       {loading ? (
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div
+          style={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           <CircularProgress />
         </div>
       ) : (
         <div className="android-showcase-container">
-          {projectsData.map((project, index) => {
-            return <AndroidProject project={project} key={project._id} />;
-          })}
+          {projects.length != 0 ? (
+            projectsData.map((project, index) => {
+              return <AndroidProject project={project} key={project._id} />;
+            })
+          ) : (
+            <Container><Typography variant="body1" sx={{color:"#fff"}}>Projects are Empty!</Typography></Container>
+          )}
         </div>
       )}
     </>
