@@ -40,12 +40,12 @@ function App() {
     };
   }, []);
 
-  console.log(screen);
-  const projects = useSelector((state) => {
+  const {projects , loading} = useSelector((state) => {
     return state.projects;
   });
   const states = {
     projects: projects,
+    loading: loading,
     setOpenSideBar: setOpenSideBar,
     offset: offset,
   };
