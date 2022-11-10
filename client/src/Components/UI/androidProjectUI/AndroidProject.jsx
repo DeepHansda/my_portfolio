@@ -3,9 +3,9 @@ import "./android.css";
 import AndroidSlider from "./AndroidSlider";
 import {FiGithub, FiGlobe} from "react-icons/fi";
 
-const htmlString = `<div>${project.description}</div>`
 
 function AndroidProject({ project }) {
+  const htmlString = `<div>${project.description}</div>`
   return (
     <div className="androidProject">
       <div className="androidProject-main">
