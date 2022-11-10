@@ -5,21 +5,12 @@ const path = require("path");
 const dotenv = require("dotenv");
 
 dotenv.config();
-const pa = path.join(__dirname,"../uploads")
-fs.exists(pa, (e) => {
-  e ? console.log("folder exists")
-    : fs.mkdir(pa, (err) => {
-        err ? console.log(err) : console.log("folder created");
-      });
-});
 
-console.log()
+
+
 
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(path.dirname(__dirname), "uploads"));
-  },
 
   filename: (req, file, cb) => {
     cb(
@@ -49,7 +40,6 @@ cloudinaryUploads = async (filePath, folder) => {
   return cloudinary.uploader
     .upload(filePath, { folder: folder })
     .then((result) => {
-      fs.unlink(filePath,(err)=>{err? console.log(err):console.log("file cleared")});
       return {
         message: "upload successful",
         public_id: result.public_id,
@@ -57,7 +47,6 @@ cloudinaryUploads = async (filePath, folder) => {
       };
     })
     .catch((error) => {
-      fs.unlink(filePath,(err)=>{err? console.log(err):console.log("file cleared")});
       return {
         message: "upload failed",
         error: error,

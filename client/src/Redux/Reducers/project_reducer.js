@@ -13,7 +13,6 @@ function projectReducer(projects = initialState ,action){
         case CREATE_PROJECT :
             return [...projects, payload]
         case RETRIVE_PROJECTS:
-            console.log(payload);
             return payload
         case DELETE_PROJECT:
             return projects.filter(({id})=>id !== payload.id)
