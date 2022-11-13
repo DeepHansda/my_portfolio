@@ -36,9 +36,9 @@
 }
 .universalBackground img {
   filter: blur(3px);
-  width: 100%;
+  width: 200%;
   height: 100%;
-  object-fit: cover;
+  /* object-fit: cover; */
 }
 @media screen and (min-width:600px){
   

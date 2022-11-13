@@ -11,7 +11,7 @@
 .project-cover {
   display: block;
   width: 320px;
-  background-color: rgba(225, 225, 225, 0.04);
+  background-color: rgba(225, 225, 225, 0.1);
   backdrop-filter: blur(8px);
   /* border-radius: 10px; */
   position: relative;
@@ -53,6 +53,13 @@
 .project-text-para ul li{
   list-style:disc
 
+}
+.project-text .duration {
+  color: rgba(255, 255, 255, 0.8);
+
+}
+.project-text .duration .duration-title {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 .project-tech {
   padding: 5px 15px;

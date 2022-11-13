@@ -4,6 +4,7 @@ import { Link, Routes, Route, Outlet } from "react-router-dom";
 import { ProjectContext } from "../../App";
 
 function Projects() {
+  
   return (
     <div className="projects">
       <div className="container-wrapper">

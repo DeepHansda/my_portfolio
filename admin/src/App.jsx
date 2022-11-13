@@ -14,9 +14,9 @@ import {
   Typography,
   Snackbar,
   IconButton,
-  Alert
+  Alert,
 } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 
 import axios from "axios";
 import React, { useContext, useState } from "react";
@@ -34,9 +34,11 @@ function App() {
   const [checkedState, setCheckedState] = useState([]);
   const [visit, setVisit] = useState("");
   const [git, setGit] = useState("");
-  const [duration, setDuration] = useState("");
-  const [open,setOpen] = useState(false);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [open, setOpen] = useState(false);
 
+  console.log(startDate);
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -53,7 +55,8 @@ function App() {
     // form.append("tech_list", checkedState);
     form.append("visit_link", visit);
     form.append("git_link", git);
-    form.append("duration", duration);
+    form.append("startingDate", startDate);
+    form.append("endingDate", endDate);
 
     client
       .post("/uploadProject", form, {
@@ -63,12 +66,11 @@ function App() {
       })
       .then(function (response) {
         console.log(response);
-        setOpen(true)
+        setOpen(true);
       })
       .catch(function (error) {
         console.log(error);
-        setOpen(false)
-
+        setOpen(false);
       });
   };
 
@@ -101,16 +103,13 @@ function App() {
     setCheckedState(updatedList);
   };
 
-
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
 
     setOpen(false);
   };
-
-
 
   const action = (
     <React.Fragment>
@@ -128,14 +127,14 @@ function App() {
   return (
     <div className="App" style={{ "overflow-x": "hidden" }}>
       <Snackbar
-        anchorOrigin={{vertical:'bottom',horizontal:'left'}}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
         open={open}
         onClose={handleClose}
         action={action}
         autoHideDuration={5000}
       >
-        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-        Project Uploaded successfully 
+        <Alert onClose={handleClose} severity="success" sx={{ width: "100%" }}>
+          Project Uploaded successfully
         </Alert>
       </Snackbar>
       <form onSubmit={submitHandler} enctype="multipart/form-data">
@@ -258,14 +257,27 @@ function App() {
                 value={git}
                 onChange={(e) => setGit(e.target.value)}
               />
+              <Typography>Starting Date</Typography>
               <TextField
                 id="standard-basic"
-                label="Duration"
                 fullWidth
                 size="small"
                 margin="normal"
-                value={duration}
-                onChange={(e) => setDuration(e.target.value)}
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+
+              <Typography>Ending Date</Typography>
+
+              <TextField
+                id="standard-basic"
+                fullWidth
+                size="small"
+                margin="normal"
+                type="date"
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
               />
 
               <Button

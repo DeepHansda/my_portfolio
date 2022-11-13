@@ -26,7 +26,7 @@ module.exports = {
       }
       // console.log(result);
 
-      const { type, title, description, tech_list, visit_link,git_link,duration } = req.body;
+      const { type, title, description, tech_list, visit_link,git_link,startingDate,endingDate} = req.body;
 
       // console.log(tech_list);
       let techList = [];
@@ -43,7 +43,10 @@ module.exports = {
         tech_list: techList,
         visit_link: visit_link,
         git_link: git_link,
-        duration: duration,
+        duration: {
+          startingDate:startingDate,
+          endingDate:endingDate
+        },
       };
       const project = await ProjectModel(data);
 
@@ -67,7 +70,7 @@ module.exports = {
   },
 
   showProjects: async (req, res) => {
-    await ProjectModel.find({}).exec((error, result) => {
+    await ProjectModel.find({}).sort({"duration.startingDate":'asc'}).exec((error, result) => {
       if (error) {
         console.log(error);
         res.status(401).json({

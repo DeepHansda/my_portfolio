@@ -3,8 +3,8 @@ import "./project.css";
 import WebSlider from "./WebSlider";
 import { FiGithub, FiGlobe } from "react-icons/fi";
 import { useState } from "react";
+import { Divider } from "@mui/material";
 function Project({ project }) {
-
   const [screen, setScreen] = useState(window.innerWidth);
   useEffect(() => {
     function handleSize() {
@@ -16,20 +16,43 @@ function Project({ project }) {
     };
   }, []);
 
+  const dateConverter = (d) => {
+    var strArray = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    const fDate = new Date(d);
+    console.log(fDate.getMonth);
+
+    return `${strArray[fDate.getMonth()]} ${fDate.getFullYear()}`;
+  };
+
   // const dom = new DOMParser()
   // const desContent = dom.parseFromString("<p>hello world<p/>","text/html");
   // console.log(desContent.body.firstChild.outerHTML)
 
-  const htmlString = `<div>${project.description}</div>`
+  const htmlString = `<div>${project.description}</div>`;
   return (
     <div className="project">
       <div className="project-cover">
-        {screen > 1024 ? 
-        <WebSlider images={project.project_img} />:
-        <div className="project-img">
-          <img src={project.project_img[0].img} alt="" />
-        </div>
-}
+        {screen > 1024 ? (
+          <WebSlider images={project.project_img} />
+        ) : (
+          <div className="project-img">
+            <img src={project.project_img[0].img} alt="" />
+          </div>
+        )}
         <div className="project-info">
           <div className="project-text">
             <div className="project-text-title">
@@ -37,8 +60,19 @@ function Project({ project }) {
             </div>
 
             <div className="project-text-para">
-            <div dangerouslySetInnerHTML={{ __html: htmlString }} />
-            
+              <div dangerouslySetInnerHTML={{ __html: htmlString }} />
+            </div>
+
+            <div className="duration">
+              <div className="duration-title">
+                <h2>Duration.</h2>
+              </div>
+              <Divider />
+              <div className="duration-str">
+                {`${dateConverter(
+                  project.duration.startingDate
+                )} - ${dateConverter(project.duration.endingDate)}`}
+              </div>
             </div>
           </div>
 
