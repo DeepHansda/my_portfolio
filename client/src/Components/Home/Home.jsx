@@ -27,9 +27,7 @@ function Home() {
           }
           alt=""
           style={{
-            transform: `${
-              screen < 834 ? "none" : `translateY(${offset * 0.4}px)`
-            }`,
+            transform: `translateY(${offset * 0.4}px)`,
           }}
         />
       </div>

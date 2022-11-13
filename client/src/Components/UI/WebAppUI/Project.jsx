@@ -46,13 +46,8 @@ function Project({ project }) {
   return (
     <div className="project">
       <div className="project-cover">
-        {screen > 1024 ? (
-          <WebSlider images={project.project_img} />
-        ) : (
-          <div className="project-img">
-            <img src={project.project_img[0].img} alt="" />
-          </div>
-        )}
+        <WebSlider images={project.project_img} />
+
         <div className="project-info">
           <div className="project-text">
             <div className="project-text-title">

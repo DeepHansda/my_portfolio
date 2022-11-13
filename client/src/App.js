@@ -40,7 +40,7 @@ function App() {
     };
   }, []);
 
-  const {projects , loading} = useSelector((state) => {
+  const { projects, loading } = useSelector((state) => {
     return state.projects;
   });
   const states = {
@@ -62,9 +62,7 @@ function App() {
             }
             alt="background"
             style={{
-              transform: `${
-                screen < 834 ? "none" : `translateY(${offset * 0.4}px)`
-              }`,
+              transform: `translateY(${offset * 0.4}px)`,
             }}
           />
         </div>
