@@ -28,12 +28,16 @@ export function WebSection() {
         </div>
       ) : (
         <div className="projects-container">
-          {projects.length !== 0 ? (
+          {projectsData.length !== 0 ? (
             projectsData.map((project, index) => {
               return <Project project={project} key={project._id} />;
             })
           ) : (
-            <Typography>Projects are Empty!</Typography>
+            <Container maxWidth="xs">
+              <Typography component="p" variant="h6" sx={{ color: "#fff" }}>
+                Projects are not Available!
+              </Typography>
+            </Container>
           )}
         </div>
       )}
@@ -64,12 +68,16 @@ export function AndroidSection() {
         </div>
       ) : (
         <div className="android-showcase-container">
-          {projects.length != 0 ? (
+          {projectsData.length != 0 ? (
             projectsData.map((project, index) => {
               return <AndroidProject project={project} key={project._id} />;
             })
           ) : (
-            <Container><Typography variant="body1" sx={{color:"#fff"}}>Projects are Empty!</Typography></Container>
+            <Container maxWidth="xs">
+              <Typography component="p" variant="h6" sx={{ color: "#fff" }}>
+                Projects are not Available!
+              </Typography>
+            </Container>
           )}
         </div>
       )}
