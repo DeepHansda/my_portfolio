@@ -46,7 +46,7 @@ function Home() {
 
           <div className="download-button">
             <a
-              href="https://drive.google.com/file/d/11dwhP0O4ymNtGXM5x7vOBTorNK2g_Oaj/view?usp=sharing"
+              href="https://drive.google.com/file/d/1g-wMWPzy0ZXblhYtfBmRE2SSpdVWRrqU/view?usp=sharing"
               target="_blank"
             >
               <p>
