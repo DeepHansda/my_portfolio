@@ -44,7 +44,7 @@
 }
 
 .project-text-para,.project-text-para p{
-  font-size: 0.8em;
+  font-size: 0.9em;
   color: rgba(255, 255, 255, 0.8);
 }
 .project-text-para ul{
@@ -53,7 +53,6 @@
 .project-text-para ul li{
   list-style:disc;
   margin:10px 0
-
 }
 .project-text .duration {
   color: rgba(255, 255, 255, 0.8);
@@ -124,6 +123,9 @@
   }
 .project-tech-item {
   padding:12px;
+}
+.project-text-para ul li{
+  font-size:1em
 }
 }
 
