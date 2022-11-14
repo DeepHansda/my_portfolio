@@ -51,7 +51,8 @@
   padding:0 10px
 }
 .project-text-para ul li{
-  list-style:disc
+  list-style:disc;
+  margin:10px 0
 
 }
 .project-text .duration {

@@ -62,7 +62,7 @@ function App() {
             }
             alt="background"
             style={{
-              transform: `translateY(${offset * 0.4}px)`,
+              transform: `translateY(${offset * 0.5}px)`,
             }}
           />
         </div>

@@ -36,9 +36,8 @@
 }
 .universalBackground img {
   filter: blur(3px);
-  width: 200%;
+  width: 100%;
   height: 100%;
-  /* object-fit: cover; */
 }
 @media screen and (min-width:600px){
   
@@ -51,5 +50,8 @@
 @media screen and (min-width: 768px){
 .universalBackground img {
   filter: blur(5px);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 }

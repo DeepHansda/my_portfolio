@@ -70,7 +70,7 @@ module.exports = {
   },
 
   showProjects: async (req, res) => {
-    await ProjectModel.find({}).sort({"duration.startingDate":'asc'}).exec((error, result) => {
+    await ProjectModel.find({}).sort({"duration":'-1'}).exec((error, result) => {
       if (error) {
         console.log(error);
         res.status(401).json({
