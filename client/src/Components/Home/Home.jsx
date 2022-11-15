@@ -91,6 +91,8 @@ function Home() {
                         transform: "rotate(0.25turn)",
                         transformOrigin: "center center",
                         strokeWidth: "1",
+                        boxShadow:
+                          "0 0 .2rem #fff,0 0 .2rem #fff,0 0 2rem #bc13fe,0 0 0.8rem #bc13fe,0 0 2.8rem #bc13fe,inset 0 0 1.3rem #bc13fe",
                       },
                       // Customize the text
                       text: {

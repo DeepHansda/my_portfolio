@@ -67,7 +67,7 @@ function AndroidProject({ project }) {
         <div className="android-project-visit">
           <button>
             <a href={project.visit_link}>
-              <FiGlobe /> visit
+              <FiGlobe /> Demo
             </a>
           </button>
         </div>

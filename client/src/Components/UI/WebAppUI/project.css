@@ -105,6 +105,12 @@
   color: #7400b8;
   border: 1px solid rgba(255, 255, 255, 0.05);
   background: linear-gradient(90deg, hsla(152, 100%, 50%, 1) 0%, hsla(186, 100%, 69%, 1) 100%);
+  box-shadow: 0 0 .2rem #fff,
+  0 0 .2rem #fff,
+  0 0 1rem hsla(186, 100%, 69%, 1),
+  0 0 0.8rem hsla(186, 100%, 69%, 1),
+  0 0 2.8rem hsla(186, 100%, 69%, 1),
+  inset 0 0 1.3rem hsla(152, 100%, 50%, 1);
 }
 .threeImg{
   width: 55px;
