@@ -8,6 +8,7 @@ require('./src/db/connection')
 // const {uploadImages} = require('./controllers/upload.controller')
 const projectRouter = require('./src/routes/projects.route')
 const contactRouter = require('./src/routes/contact.routes')
+const exprienceRouter = require('./src/routes/expriences.routes')
 app.use(express.json());
 app.use(bodyParser.urlencoded({
     extended:true
@@ -19,6 +20,7 @@ app.use(cors({
 
 app.use('/api',projectRouter);
 app.use('/api',contactRouter)
+app.use('/api',exprienceRouter)
 
 
 app.get('/', (req, res) => {
