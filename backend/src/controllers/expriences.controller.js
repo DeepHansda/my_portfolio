@@ -47,7 +47,7 @@ module.exports = {
   },
   getExpriences: async (req, res) => {
     try {
-      await ExprienceModel.find().exec((error, result) => {
+      await ExprienceModel.find().sort('duration.joiningDate').exec((error, result) => {
         if (error) {
           res.status(404).json({
             status: 0,
