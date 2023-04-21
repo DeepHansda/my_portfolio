@@ -9,13 +9,12 @@ const projectSchema = new mongoose.Schema(
     },
     project_img: [
       {
-       img: {
+        img: {
           type: String,
           trim: true,
           required: true,
-        }
-      }
-      
+        },
+      },
     ],
     title: {
       type: String,
@@ -27,7 +26,7 @@ const projectSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    tech_list: [{tech:String,name:String}],
+    tech_list: [{ tech: String, name: String }],
     visit_link: {
       type: String,
       required: true,
@@ -39,16 +38,19 @@ const projectSchema = new mongoose.Schema(
       trim: true,
     },
 
-    duration:{
-      startingDate:{
+    duration: {
+      startingDate: {
         type: Date,
         required: true,
       },
-      endingDate:{
+      endingDate: {
         type: Date,
         required: true,
-      }
-    }
+      },
+    },
+    rating: {
+      type: Number,
+    },
   },
   { timestamps: true }
 );

@@ -47,20 +47,22 @@ module.exports = {
   },
   getExpriences: async (req, res) => {
     try {
-      await ExprienceModel.find().sort('duration.joiningDate').exec((error, result) => {
-        if (error) {
-          res.status(404).json({
-            status: 0,
-            message: "something went wrong.",
-            error: error.message,
+      await ExprienceModel.find()
+        .sort({ "duration.joiningDate": -1 })
+        .exec((error, result) => {
+          if (error) {
+            res.status(404).json({
+              status: 0,
+              message: "something went wrong.",
+              error: error.message,
+            });
+          }
+          res.status(200).json({
+            status: 1,
+            message: "success",
+            expriences: result,
           });
-        }
-        res.status(200).json({
-          status: 1,
-          message: "success",
-          expriences: result,
         });
-      });
     } catch (error) {
       res.status(404).json({
         status: 0,

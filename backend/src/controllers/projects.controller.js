@@ -13,20 +13,27 @@ module.exports = {
         const result = await cloudinaryUploads(path, folderName);
         if (result.error) {
           console.log(error);
-          res
-            .status(401)
-            .json({
-              success: 0,
-              message: "Error when uploading",
-              error: error,
-            });
+          res.status(401).json({
+            success: 0,
+            message: "Error when uploading",
+            error: error,
+          });
         } else {
           imgUrlList.push({ img: result.url });
         }
       }
       // console.log(result);
 
-      const { type, title, description, tech_list, visit_link,git_link,startingDate,endingDate} = req.body;
+      const {
+        type,
+        title,
+        description,
+        tech_list,
+        visit_link,
+        git_link,
+        startingDate,
+        endingDate,
+      } = req.body;
 
       // console.log(tech_list);
       let techList = [];
@@ -44,8 +51,8 @@ module.exports = {
         visit_link: visit_link,
         git_link: git_link,
         duration: {
-          startingDate:startingDate,
-          endingDate:endingDate
+          startingDate: startingDate,
+          endingDate: endingDate,
         },
       };
       const project = await ProjectModel(data);
@@ -70,23 +77,25 @@ module.exports = {
   },
 
   showProjects: async (req, res) => {
-    await ProjectModel.find({}).sort({"duration":'-1'}).exec((error, result) => {
-      if (error) {
-        console.log(error);
-        res.status(401).json({
-          success: 0,
-          message: "something went wrong",
-          error: error,
-        });
-      } else if (!result || result.length == 0) {
-        res.status(401).json({
-          success: 0,
-          message: "projects not found!",
-        });
-      } else {
-        res.status(200).send(result);
-      }
-    });
+    await ProjectModel.find({})
+      .sort({ rating: -1 })
+      .exec((error, result) => {
+        if (error) {
+          console.log(error);
+          res.status(401).json({
+            success: 0,
+            message: "something went wrong",
+            error: error,
+          });
+        } else if (!result || result.length == 0) {
+          res.status(401).json({
+            success: 0,
+            message: "projects not found!",
+          });
+        } else {
+          res.status(200).send(result);
+        }
+      });
   },
 
   deleteProject: async (req, res) => {
