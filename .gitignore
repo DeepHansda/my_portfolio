@@ -1,4 +1,52 @@
-client/node_modules
+
+#Backend Side .gitignore
+#######################################
 backend/node_modules
 admin/node_modules
 backend/.env
+backend/vercel.json
+
+
+#######################################
+#Client Side .gitignore
+#######################################
+
+# dependencies
+next-client/node_modules
+next-client/.pnp
+next-client/.pnp.*
+next-client/.yarn/*
+next-client/!.yarn/patches
+next-client/!.yarn/plugins
+next-client/!.yarn/releases
+next-client/!.yarn/versions
+
+# testing
+next-client/coverage
+
+# next.js
+next-client/.next/
+next-client/out/
+
+# production
+next-client/build
+
+# misc
+next-client/.DS_Store
+next-client/*.pem
+
+# debug
+next-client/npm-debug.log*
+next-client/yarn-debug.log*
+next-client/yarn-error.log*
+next-client/.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+next-client/.env*
+
+# vercel
+next-client/.vercel
+
+# typescript
+next-client/*.tsbuildinfo
+next-client/next-env.d.ts
