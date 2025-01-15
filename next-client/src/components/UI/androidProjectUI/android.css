@@ -1,0 +1,87 @@
+.androidProject {
+  width: 100%;
+  padding: 20px;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+}
+.androidProject-main {
+  box-shadow: var(--app-shadow);
+  background-color: rgba(225, 225, 225, 0.1);
+  backdrop-filter: blur(8px);
+}
+.androidProject-img .android-slide-container {
+  margin: 0;
+  /* padding:0px 15px; */
+}
+.androidProject-img .android-slide-container img {
+  max-width: 100%;
+}
+
+.androidProject-info .androidProject-info-text {
+  font-family: "Poppins", sans-serif;
+  padding: 5px 15px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+}
+.android-project-title h2 {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  color: #fff;
+}
+.androidProject-info .androidProject-info-text .android-project-para {
+  text-transform: capitalize;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+.androidProject-info .androidProject-info-text .android-project-para ul{
+  padding: 0 10px
+}
+.androidProject-info .androidProject-info-text .android-project-para ul li{
+  list-style: disc;
+  margin: 5px 0;
+}
+.androidProject-info-text .duration {
+  color: rgba(255, 255, 255, 0.8);
+}
+.androidProject-info-text .duration .duration-title {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.android-project-tech-container {
+  width: 100%;
+  padding: 10px 15px;
+}
+.android-project-tech-list {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.android-project-tech-list .android-project-tech {
+  width: 32px;
+}
+
+.android-project-tech-list .android-project-tech img {
+  max-width: 100%;
+}
+
+.android-project-visit button {
+  width: 100%;
+  border: none;
+  padding: 5px 0px;
+  box-shadow: 0 0 .2rem #fff,
+              0 0 .2rem #fff,
+              0 0 2rem #bc13fe,
+              0 0 0.8rem #bc13fe,
+              0 0 2.8rem #bc13fe,
+              inset 0 0 1.3rem #bc13fe;
+  background: linear-gradient(
+    90deg,
+    hsla(211, 96%, 62%, 1) 0%,
+    hsla(295, 94%, 76%, 1) 100%
+  );
+
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 16px;
+  color: #7400b8;
+}

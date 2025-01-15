@@ -1,0 +1,32 @@
+.portfolio-navbar {
+    width: 100%;
+    background-color: #fff;
+}
+.portfolio-navbar .navbar-container {
+    width: 100%;
+    display:flex;
+    align-items: center;
+    padding: 5px;
+}
+
+
+.portfolio-navbar .navbar-container .item-one{
+    font-size:25px;
+    cursor: pointer;
+    /* padding:5px; */
+
+}
+.portfolio-navbar .navbar-container .item-two{
+    padding:0px 10px;
+}
+.portfolio-navbar .navbar-container .item-two p{
+    font-family: 'Square Peg', cursive;
+    font-size: 30px;
+    text-transform: capitalize;
+}
+
+@media screen and (min-width:1280px){
+.portfolio-navbar {
+    display: none;
+}
+}
