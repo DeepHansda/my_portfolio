@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import "./about.css";
-import SocialContactBar from "../UI/ContactBar/ContactBar";
-import EmailNumber from "../UI/EmailNumber/EmailNumber";
+import SocialContactBar from "../../UI/ContactBar/ContactBar";
+import EmailNumber from "../../UI/EmailNumber/EmailNumber";
 import aboutData from "../../Data/AboutData";
 import { ProjectContext } from "../../App";
 

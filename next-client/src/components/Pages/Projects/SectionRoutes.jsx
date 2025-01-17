@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ProjectContext } from "../../App";
-import Project from "../UI/WebAppUI/Project";
-import AndroidProject from "../UI/androidProjectUI/AndroidProject";
+import Project from "../../UI/WebAppUI/Project";
+import AndroidProject from "../../UI/androidProjectUI/AndroidProject";
 import "./cat.css";
 import { CircularProgress, Container, Typography } from "@mui/material";
 

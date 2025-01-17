@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import Link from "next/link";
 import "./projects.css";
-import { Link, Routes, Route, Outlet } from "react-router-dom";
-import { ProjectContext } from "../../App";
 
 function Projects() {
   
@@ -13,19 +11,19 @@ function Projects() {
         </div>
         <div className="projects-selection">
           <div className="project-web cat">
-            <Link to="/webProjects">
+            <Link href="/webProjects">
               <div className="web-button">web app</div>
             </Link>
           </div>
           <div className="project-and cat">
-            <Link to="/androidProjects">
+            <Link href="/androidProjects">
               <div className="and-button">android app</div>
             </Link>
           </div>
         </div>
       </div>
       <div>
-        <Outlet />
+        {/* <Outlet /> */}
       </div>
     </div>
   );

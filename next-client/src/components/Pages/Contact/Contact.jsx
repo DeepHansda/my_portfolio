@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import "./contact.css";
-import ContactBar from "../UI/ContactBar/ContactBar";
-import Form from "../UI/Form/Form";
-import EmailNumber from "../UI/EmailNumber/EmailNumber";
+import ContactBar from "../../UI/ContactBar/ContactBar";
+import Form from "../../UI/Form/Form";
+import EmailNumber from "../../UI/EmailNumber/EmailNumber";
 import { ProjectContext } from "../../App";
 function Contact() {
   const states = useContext(ProjectContext);

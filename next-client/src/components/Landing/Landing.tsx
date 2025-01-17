@@ -1,23 +1,9 @@
-import { useContext, useEffect, useState } from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { FiDownload } from "react-icons/fi";
-import { ProjectContext } from "../../App";
-import { ProgressData } from "../../Data/ProgressData";
-import "./home.css";
-function Home() {
-  const data = useContext(ProjectContext);
-  const offset = data.offset;
-  const [screen, setScreen] = useState(window.innerWidth);
-  useEffect(() => {
-    function handleSize() {
-      setScreen(window.innerWidth);
-    }
-    window.addEventListener("resize", handleSize);
-    return () => {
-      window.removeEventListener("resize", handleSize);
-    };
-  }, []);
+import { ProgressData } from "../../utils/data/ProgressData";
+import "./landing.css";
+function Landing() {
   return (
     <div className="home">
       <div className="home-background">
@@ -25,12 +11,7 @@ function Home() {
           src={
             "https://res.cloudinary.com/manjiro/image/upload/v1655702305/portfolio_images/xor/fotis-fotopoulos-6sAl6aQ4OWI-unsplash_s50hcp.jpg"
           }
-          alt=""
-          style={{
-            transform: `${
-              screen < 600 ? "none" : `translateY(${offset * 0.4}px)`
-            }`,
-          }}
+          alt="bg"
         />
       </div>
       <div className="home-container">
@@ -59,9 +40,9 @@ function Home() {
 
         <div className="progress-bars">
           <ul className="progress-bar-container">
-            {ProgressData.map((data) => {
+            {ProgressData.map((data,index) => {
               return (
-                <li>
+                <li key={index}>
                   <CircularProgressbar
                     value={data.percent}
                     text={`${data.percent}%`}
@@ -121,4 +102,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Landing;
