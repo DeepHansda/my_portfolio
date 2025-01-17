@@ -11,9 +11,8 @@ function Footer() {
           <h1>contact with me</h1>
         </div>
         <div className="footer-sections">
-        <div className="footer-container-section-1">
+          <div className="footer-container-section-1">
             <EmailNumber />
-           
           </div>
 
           <div className="footer-container-section-2">
@@ -26,8 +25,6 @@ function Footer() {
               <SocialContactBar />
             </div>
           </div>
-
-          
         </div>
       </div>
     </div>
