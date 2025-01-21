@@ -2,6 +2,8 @@
 import { FiDownload } from "react-icons/fi";
 import "./landing.css";
 import { SkillsRatigsSlider } from "./SkillsRatigsSlider";
+import Image from "next/image";
+import { Button } from "@heroui/button";
 function Landing() {
   return (
     <div className="home">
@@ -14,31 +16,32 @@ function Landing() {
         />
       </div> */}
       <div className="home-container">
-        <div className="intro">
-          <div className="home-intro-text">
-            <h2>Deep Hansda</h2>
-            <p>
-              "Be Water, My Friend."
-              <br />
-              <span>--Bruce Lee</span>
-            </p>
+        <div>
+
+
+          <div className="intro">
+            <div className="home-intro-text">
+              <h2>Deep Hansda</h2>
+              <p>
+                "Be Water, My Friend."
+                <br />
+                <span>--Bruce Lee</span>
+              </p>
+            </div>
+
+            <div className="download-button my-2">
+              <Button variant="shadow" color="secondary" size="md" startContent={<FiDownload/>}>Download Resume.</Button>
+            </div>
           </div>
 
-          <div className="download-button">
-            <a
-              href="https://drive.google.com/file/d/1g-wMWPzy0ZXblhYtfBmRE2SSpdVWRrqU/view?usp=sharing"
-              target="_blank"
-            >
-              <p>
-                <FiDownload />
-              </p>
-              <button>Download Portfolio</button>
-            </a>
+          <div className="progress-bars">
+            <SkillsRatigsSlider />
           </div>
         </div>
-
-        <div className="progress-bars">
-          <SkillsRatigsSlider/>
+        <div>
+          <div className="w-full">
+            <Image src="https://res.cloudinary.com/manjiro/image/upload/v1681965589/portfolio_images/git/portfolio_images/git/contributions.png.png" alt="git" width={676} height={614} className="max-w-full h-auto"/>
+          </div>
         </div>
       </div>
     </div>

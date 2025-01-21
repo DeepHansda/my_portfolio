@@ -5,6 +5,7 @@ backend/node_modules
 admin/node_modules
 backend/.env
 backend/vercel.json
+/my_portfolio_next_js
 
 
 #######################################

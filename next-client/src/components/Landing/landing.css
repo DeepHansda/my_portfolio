@@ -17,19 +17,9 @@
   /* object-fit: cover; */
   filter: blur(2px);
 }
-.home-container {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row-reverse;
-  padding: 10px;
-  transition: all 0.2s linear;
-}
+
 .intro {
   width: fit-content;
-  margin-left: 10%;
   z-index: 100;
   font-family: "Poppins", sans-serif;
 }
@@ -42,7 +32,7 @@
   text-align: left;
 }
 .home-intro-text h2 {
-  font-size: 4em;
+  font-size: 4rem;
   line-height: 1;
 }
 .home-intro-text p {
@@ -57,9 +47,9 @@
 }
 
 .progress-bars {
-  width: 55px;
-  margin-left: 10px;
-  padding: 20px 0;
+  /* width:fit-content; */
+  /* margin-left: 10px; */
+  padding:20px 26px ;
   z-index: 100;
 }
 .progress-bar-container {
@@ -69,13 +59,7 @@
   height: 100vh;
 }
 
-.progress-bar-container li {
-  display: flex;
-  flex-direction: column;
-  /* margin: 14px 0px; */
-  align-items: center;
-  font-family: "Poppins", sans-serif;
-}
+
 
 .progress-name {
   font-family: "Poppins", sans-serif;
@@ -181,7 +165,6 @@
   }
   .progress-bars {
     width: 100%;
-    height: 80px;
   }
   .progress-bar-container {
     flex-direction: row;
