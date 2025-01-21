@@ -14,7 +14,7 @@ export const SkillsRatigsSlider = () => {
     <Slider {...landingSliderData}>
       {ProgressData.map((data,index) => {
               return (
-                <div key={index} className='max-w-48 mx-2'>
+                <div key={index} className='max-w-48 px-2 text-center'>
                   <CircularProgressbar
                     value={data.percent}
                     text={`${data.percent}%`}

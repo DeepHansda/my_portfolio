@@ -1,8 +1,7 @@
-import React from "react";
-import "./footer.css";
+"use client"
 import SocialContactBar from "../UI/ContactBar/ContactBar";
 import EmailNumber from "../UI/EmailNumber/EmailNumber";
-import Form from "../UI/Form/Form";
+import "./footer.css";
 function Footer() {
   return (
     <div className="footer">
@@ -20,7 +19,7 @@ function Footer() {
               <div className="get-touch">get in touch</div>
             </div>
 
-            <Form />
+            {/* <Form /> */}
             <div className="social-wrapper-container">
               <SocialContactBar />
             </div>
