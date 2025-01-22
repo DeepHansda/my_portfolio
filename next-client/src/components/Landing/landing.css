@@ -2,6 +2,7 @@
   width: 100vw;
   height: 100vh;
   position: relative;
+  padding: 0 0.75rem;
 }
 .home-background {
   position: absolute;
@@ -22,11 +23,12 @@
   width: fit-content;
   z-index: 100;
   font-family: "Poppins", sans-serif;
+  padding:0 0.75rem;
 }
 
 .home-intro-text {
   font-family: "Poppins", sans-serif;
-  color: #fff;
+  /* color: #fff; */
   width: fit-content;
   height: 100%;
   text-align: left;

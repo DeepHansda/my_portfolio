@@ -1,4 +1,3 @@
-
 import { FiDownload } from "react-icons/fi";
 import "./landing.css";
 import { SkillsRatigsSlider } from "./SkillsRatigsSlider";
@@ -17,8 +16,6 @@ function Landing() {
       </div> */}
       <div className="home-container">
         <div>
-
-
           <div className="intro">
             <div className="home-intro-text">
               <h2>Deep Hansda</h2>
@@ -29,8 +26,15 @@ function Landing() {
               </p>
             </div>
 
-            <div className="download-button my-2">
-              <Button variant="shadow" color="secondary" size="md" startContent={<FiDownload/>}>Download Resume.</Button>
+            <div className="my-2">
+              <Button
+                variant="shadow"
+                color="secondary"
+                size="md"
+                startContent={<FiDownload />}
+              >
+                Download Resume.
+              </Button>
             </div>
           </div>
 
@@ -38,9 +42,15 @@ function Landing() {
             <SkillsRatigsSlider />
           </div>
         </div>
-        <div>
-          <div className="w-full">
-            <Image src="https://res.cloudinary.com/manjiro/image/upload/v1681965589/portfolio_images/git/portfolio_images/git/contributions.png.png" alt="git" width={676} height={614} className="max-w-full h-auto"/>
+        <div className="mt-4">
+          <div className="w-full px-3">
+            <Image
+              src="https://res.cloudinary.com/manjiro/image/upload/v1681965589/portfolio_images/git/portfolio_images/git/contributions.png.png"
+              alt="git"
+              width={676}
+              height={614}
+              className="max-w-full h-auto  shadow-xl mx-auto shadow-green-500/25"
+            />
           </div>
         </div>
       </div>
