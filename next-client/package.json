@@ -14,6 +14,8 @@
     "@heroui/react": "^2.6.13",
     "@heroui/system": "^2.4.7",
     "@heroui/theme": "^2.4.6",
+    "@tanstack/react-query": "4",
+    "axios": "^1.7.9",
     "framer-motion": "^11.18.0",
     "next": "15.1.4",
     "react": "^19.0.0",

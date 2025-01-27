@@ -1,15 +1,19 @@
-import React from 'react'
-import { BsWhatsapp } from 'react-icons/bs';
-import {FiLinkedin,FiFacebook,FiGithub } from "react-icons/fi";
-import './socialContactBar.css'
+import { socialLinks } from "@/utils/data/PersonalData";
+import { Button } from "@heroui/react";
+import Link from "next/link";
 
 function SocialContactBar() {
-    return <div className="social-contact-container">
-        <li><a href="https://api.whatsapp.com/send?phone=+919647750384" target="_blank"><p><BsWhatsapp/></p></a></li>
-        <li><a href="https://www.linkedin.com/in/deep-hansda-44627a20a/" target="_blank"><p><FiLinkedin/></p></a></li>
-        <li><a href="https://github.com/DeepHansda" target="_blank"><p><FiGithub /></p></a></li>
-        <li><a href="https://www.facebook.com/deep.hansda.7146" target="_blank"><p><FiFacebook /></p></a></li>
-    </div>;
+  return (
+    <div className="flex gap-3">
+      {socialLinks.map((value, index) => (
+        <Link href={value.url} key={index}>
+          <Button size="sm" isIconOnly aria-label={value.name} color={value.color} variant="shadow" className="animate-pulse hover:animate-none">
+            <value.icon size={18}/>
+          </Button>
+        </Link>
+      ))}
+    </div>
+  );
 }
 
 export default SocialContactBar;
