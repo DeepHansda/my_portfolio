@@ -76,7 +76,7 @@ body {
 }
 
 .steps .steps-container:nth-child(even) {
-  left: calc(50% - 32px);
+  left: calc(45% - 32px);
   flex-direction: row-reverse;
 }
 
