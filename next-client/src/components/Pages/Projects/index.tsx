@@ -1,8 +1,14 @@
 import Link from "next/link";
 import "./projects.css";
+import { Query, useQuery } from "@tanstack/react-query";
+import Project from "@/components/UI/WebAppUI";
+import { GET_PROJECTS } from "@/utils/AxiosUtils/api";
+import request from "@/utils/AxiosUtils";
 
 function Projects() {
-  
+  const { data, isLoading } = useQuery([GET_PROJECTS], () =>
+    request({ url: GET_PROJECTS })
+  );
   return (
     <div className="projects">
       <div className="container-wrapper">
@@ -23,7 +29,7 @@ function Projects() {
         </div>
       </div>
       <div>
-        {/* <Outlet /> */}
+        <Project project={} />
       </div>
     </div>
   );

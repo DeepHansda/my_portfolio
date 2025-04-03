@@ -1,12 +1,9 @@
-import React, { Component } from "react";
 import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 
 function WebSlider({ images }) {
-
   var settings = {
-    lazyLoad: true,
     infinite: true,
     speed: 2000,
     slidesToShow: 1,
@@ -21,10 +18,9 @@ function WebSlider({ images }) {
   return (
     <div className="web-slide-container">
       <Slider {...settings}>
-        {images.map((image) => {
+        {images.map((image, index) => {
           return (
-            
-            <div className="project-img">
+            <div key={index} className="project-img">
               <img src={image.img} alt="project-img" />
             </div>
           );

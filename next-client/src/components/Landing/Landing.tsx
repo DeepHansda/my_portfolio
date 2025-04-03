@@ -1,8 +1,9 @@
 import { FiDownload } from "react-icons/fi";
 import "./landing.css";
 import { SkillsRatigsSlider } from "./SkillsRatigsSlider";
-import Image from "next/image";
 import { Button } from "@heroui/button";
+import { Image } from "@heroui/react";
+import SocialContactBar from "../UI/ContactBar/ContactBar";
 function Landing() {
   return (
     <div className="home">
@@ -15,7 +16,7 @@ function Landing() {
         />
       </div> */}
       <div className="home-container">
-        <div>
+        <div className="home-intro">
           <div className="intro">
             <div className="home-intro-text">
               <h2>Deep Hansda</h2>
@@ -26,7 +27,7 @@ function Landing() {
               </p>
             </div>
 
-            <div className="my-2">
+            <div className="my-3">
               <Button
                 variant="shadow"
                 color="secondary"
@@ -42,15 +43,19 @@ function Landing() {
             <SkillsRatigsSlider />
           </div>
         </div>
-        <div className="mt-4">
-          <div className="w-full px-3">
+        <div className="git-img">
+          <div className="git-img-container">
             <Image
               src="https://res.cloudinary.com/manjiro/image/upload/v1681965589/portfolio_images/git/portfolio_images/git/contributions.png.png"
               alt="git"
               width={676}
-              height={614}
-              className="max-w-full h-auto  shadow-xl mx-auto shadow-green-500/25"
+              isBlurred={true}
+              className="max-w-full h-auto   mx-auto"
             />
+          </div>
+          <div className="px-3 my-3">
+            <p className="pb-2 text-tiny">Connect With ME.</p>
+            <SocialContactBar/>
           </div>
         </div>
       </div>

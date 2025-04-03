@@ -1,28 +1,34 @@
 const fs = require("fs");
 const { cloudinaryUploads } = require("../services/projects.service");
-
 const ProjectModel = require("../db/models/project.model");
+
 module.exports = {
   uploadProjects: async (req, res) => {
-    if (req.method === "POST") {
+    if (req.method !== "POST") {
+      return res
+        .status(405)
+        .json({ success: 0, message: "Method not allowed" });
+    }
+
+    try {
       const imgUrlList = [];
-      // console.log(req.files)
-      var folderName = "portfolio_images";
-      for (let i = 0; i < req.files.length; i++) {
-        const path = req.files[i].path;
+      const folderName = "portfolio_images";
+
+      for (let file of req.files) {
+        const path = file.path;
         const result = await cloudinaryUploads(path, folderName);
+
         if (result.error) {
-          console.log(error);
-          res.status(401).json({
+          console.error(result.error);
+          return res.status(400).json({
             success: 0,
             message: "Error when uploading",
-            error: error,
+            error: result.error,
           });
-        } else {
-          imgUrlList.push({ img: result.url });
         }
+
+        imgUrlList.push({ img: result.url });
       }
-      // console.log(result);
 
       const {
         type,
@@ -35,84 +41,97 @@ module.exports = {
         endingDate,
       } = req.body;
 
-      // console.log(tech_list);
       let techList = [];
 
-      for (let tech of tech_list) {
-        const parsedTech = JSON.parse(tech);
-        techList.push(parsedTech);
-      }
-      const data = {
-        type: type,
-        project_img: imgUrlList,
-        title: title,
-        description: description,
-        tech_list: techList,
-        visit_link: visit_link,
-        git_link: git_link,
-        duration: {
-          startingDate: startingDate,
-          endingDate: endingDate,
-        },
-      };
-      const project = await ProjectModel(data);
-
-      project.save((err, result) => {
-        if (err) {
-          console.log(err);
-          res.status(400).json({
+      if (Array.isArray(tech_list)) {
+        techList = tech_list.map((tech) => JSON.parse(tech));
+      } else {
+        try {
+          techList = JSON.parse(tech_list);
+        } catch (error) {
+          return res.status(400).json({
             success: 0,
-            message: "project adding failed",
-            error: err,
+            message: "Invalid tech_list format",
+            error: error.message,
           });
         }
+      }
 
-        res.status(200).json({
-          success: 1,
-          message: "project added successfully",
-          data: result,
-        });
+      const project = new ProjectModel({
+        type,
+        project_img: imgUrlList,
+        title,
+        description,
+        tech_list: techList,
+        visit_link,
+        git_link,
+        duration: {
+          startingDate,
+          endingDate,
+        },
+      });
+
+      const savedProject = await project.save();
+
+      res.status(201).json({
+        success: 1,
+        message: "Project added successfully",
+        data: savedProject,
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        success: 0,
+        message: "Something went wrong",
+        error: error.message,
       });
     }
   },
 
   showProjects: async (req, res) => {
-    await ProjectModel.find({})
-      .sort({ rating: -1 })
-      .exec((error, result) => {
-        if (error) {
-          console.log(error);
-          res.status(401).json({
-            success: 0,
-            message: "something went wrong",
-            error: error,
-          });
-        } else if (!result || result.length == 0) {
-          res.status(401).json({
-            success: 0,
-            message: "projects not found!",
-          });
-        } else {
-          res.status(200).send(result);
-        }
+    try {
+      const { type } = req.query;
+      const filter = type ? { type } : {};
+      const projects = await ProjectModel.find(filter).sort({ rating: -1 });
+
+      if (!projects.length) {
+        return res
+          .status(404)
+          .json({ success: 0, message: "Projects not found!" });
+      }
+
+      res.status(200).json({ success: 1, data: projects });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        success: 0,
+        message: "Something went wrong",
+        error: error.message,
       });
+    }
   },
 
   deleteProject: async (req, res) => {
-    const id = req.params.id;
-    await ProjectModel.findByIdAndDelete({ _id: id }).exec((error, result) => {
-      if (error) {
-        console.log(error);
-        res
-          .status(401)
-          .json({ success: 0, message: "deletation failed", error: error });
-      } else if (!result || result.length == 0) {
-        res.status(401).json({ success: 0, message: "projects not found" });
-      } else {
-        res
-          .status(200)
-          .json({ success: 1, message: "deleted successfully", data: result });
+    try {
+      const { id } = req.params;
+      const project = await ProjectModel.findByIdAndDelete(id);
+
+      if (!project) {
+        return res
+          .status(404)
+          .json({ success: 0, message: "Project not found" });
       }
-    });
+
+      res
+        .status(200)
+        .json({ success: 1, message: "Deleted successfully", data: project });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        success: 0,
+        message: "Deletion failed",
+        error: error.message,
+      });
+    }
   },
 };

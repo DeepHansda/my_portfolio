@@ -1,4 +1,5 @@
 
+import Expriences from "@/components/Expriecences";
 import Landing from "../../Landing/Landing";
 function HomeComponent() {
  
@@ -6,6 +7,7 @@ function HomeComponent() {
   return (
     <div className="main">
      <Landing/>
+     <Expriences/>
     </div>
   );
 }

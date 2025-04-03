@@ -5,17 +5,18 @@ dotenv.config();
 const uri = process.env.MONGO_URI;
 mongoose.set("strictQuery", true);
 
-const connection = mongoose
-  .connect(uri, {
-    useNewUrlParser: true,
-    // useCreateIndex:true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("mongodb connected");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+const connection = () =>
+  mongoose
+    .connect(uri, {
+      useNewUrlParser: true,
+      // useCreateIndex:true,
+      useUnifiedTopology: true,
+    })
+    .then(() => {
+      console.log("mongodb connected");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
 module.exports = connection;
