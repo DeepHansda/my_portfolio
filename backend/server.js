@@ -1,15 +1,17 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const PORT = process.env.PORT || 3400;
 const cors = require("cors");
-
-require("./src/db/connection");
-// const {uploadImages} = require('./controllers/upload.controller')
+const connection = require("./src/db/connection");
 const projectRouter = require("./src/routes/projects.route");
 const contactRouter = require("./src/routes/contact.routes");
-const exprienceRouter = require("./src/routes/expriences.routes");
+const experienceRouter = require("./src/routes/experiences.routes");
 const resumeRouter = require("./src/routes/resume.routes");
+
+//Initialize database connection
+connection();
+const PORT = process.env.PORT || 3400;
+
 app.use(express.json());
 app.use(
   bodyParser.urlencoded({
@@ -25,7 +27,7 @@ app.use(
 
 app.use("/api", projectRouter);
 app.use("/api", contactRouter);
-app.use("/api", exprienceRouter);
+app.use("/api", experienceRouter);
 app.use("/api", resumeRouter);
 
 app.get("/", (req, res) => {

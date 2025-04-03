@@ -1,78 +1,76 @@
 const ResumeModel = require("../db/models/resume.model");
+
 module.exports = {
   uploadResume: async (req, res) => {
     try {
       const { link } = req.body;
 
-      const resume = ResumeModel({ resume: link });
+      const resume = new ResumeModel({ resume: link });
+      const savedResume = await resume.save();
 
-      await resume.save((err, result) => {
-        if (err) {
-          res.status(404).json({
-            status: 0,
-            message: "something went wrong.",
-            error: err.message,
-          });
-        }
-        res.status(200).json({
-          status: 1,
-          message: "Resume Added Successfully.",
-          result: result,
-        });
+      res.status(201).json({
+        success: 1,
+        message: "Resume added successfully.",
+        data: savedResume,
       });
     } catch (error) {
-      console.log(error);
-      res.status(404).json({
-        status: 0,
-        message: "something went wrong.",
+      console.error(error);
+      res.status(500).json({
+        success: 0,
+        message: "Something went wrong.",
         error: error.message,
       });
     }
   },
+
   getResume: async (req, res) => {
     try {
-      await ResumeModel.find().exec((error, result) => {
-        if (error) {
-          res.status(404).json({
-            status: 0,
-            message: "something went wrong.",
-            error: error.message,
-          });
-        }
-        res.status(200).json({
-          status: 1,
-          message: "success",
-          result,
+      const resumes = await ResumeModel.find();
+
+      if (!resumes.length) {
+        return res.status(404).json({
+          success: 0,
+          message: "No resumes found.",
         });
+      }
+
+      res.status(200).json({
+        success: 1,
+        message: "Success",
+        data: resumes,
       });
     } catch (error) {
-      res.status(404).json({
-        status: 0,
-        message: "something went wrong.",
+      console.error(error);
+      res.status(500).json({
+        success: 0,
+        message: "Something went wrong.",
         error: error.message,
       });
     }
   },
+
   deleteResume: async (req, res) => {
     try {
       const { id } = req.params;
-      await ResumeModel.findByIdAndDelete({ _id: id }).exec((error, result) => {
-        if (error) {
-          res.status(404).json({
-            status: 0,
-            message: "something went wrong.",
-            error: error.message,
-          });
-        }
-        res.status(200).json({
-          status: 1,
-          message: "resume deleted.",
+      const deletedResume = await ResumeModel.findByIdAndDelete(id);
+
+      if (!deletedResume) {
+        return res.status(404).json({
+          success: 0,
+          message: "Resume not found.",
         });
+      }
+
+      res.status(200).json({
+        success: 1,
+        message: "Resume deleted successfully.",
+        data: deletedResume,
       });
     } catch (error) {
-      res.status(404).json({
-        status: 0,
-        message: "something went wrong.",
+      console.error(error);
+      res.status(500).json({
+        success: 0,
+        message: "Something went wrong.",
         error: error.message,
       });
     }
