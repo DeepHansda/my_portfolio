@@ -1,13 +1,12 @@
-
-import Expriences from "@/components/Expriecences";
+import Experiences from "@/components/Experiences";
+import Projects from "@/components/Projects";
 import Landing from "../../Landing/Landing";
 function HomeComponent() {
- 
- 
   return (
     <div className="main">
-     <Landing/>
-     <Expriences/>
+      <Landing />
+      <Experiences />
+      <Projects />
     </div>
   );
 }

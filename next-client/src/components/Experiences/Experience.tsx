@@ -1,31 +1,31 @@
-import Image from "next/image";
-import React from "react";
-import styles from "./Expriences.module.css";
 import { dateConverter } from "@/utils/dateConverter";
 import { monthDiff } from "@/utils/monthDiff";
 import { Card, CardBody, CardFooter, CardHeader, Divider } from "@heroui/react";
-
-const Exprience = ({ exprience }: { exprience: Record<string, any> }) => {
+import Image from "next/image";
+import styles from "./Experiences.module.css";
+const Experience = ({ experience }: { experience: Record<string, any> }) => {
   return (
     <div className="steps-container">
-      <Card>
+      <Card className="w-[600px]">
         <CardHeader className="flex-col items-start">
-          <h2 className="text-2xl font-[Poppins] capitalize">{exprience.title}</h2>
+          <h2 className="text-2xl font-[Poppins] capitalize">
+            {experience.title}
+          </h2>
           <div className={styles.expCompany}>
-            <h4>{exprience.companyName}</h4>
-            <p> &middot; {exprience.position}</p>
+            <h4>{experience.companyName}</h4>
+            <p> &middot; {experience.position}</p>
           </div>
           <div className={styles.expDateContainer}>
             <div className={styles.stepDate}>
-              <p>{dateConverter(exprience.duration.joiningDate)}</p>-
-              <p>{dateConverter(exprience.duration.leavingDate)}</p>
+              <p>{dateConverter(experience.duration.joiningDate)}</p>-
+              <p>{dateConverter(experience.duration.leavingDate)}</p>
             </div>
             <div className={styles.expMonthfDiff}>
               <p>
                 &middot;{" "}
                 {monthDiff(
-                  new Date(exprience.duration.joiningDate),
-                  new Date(exprience.duration.leavingDate)
+                  new Date(experience.duration.joiningDate),
+                  new Date(experience.duration.leavingDate)
                 )}{" "}
                 Months
               </p>
@@ -35,14 +35,14 @@ const Exprience = ({ exprience }: { exprience: Record<string, any> }) => {
         <Divider />
         <CardBody>
           <div
-            className={styles.expriencesStepsDesc}
-            dangerouslySetInnerHTML={{ __html: exprience.des }}
+            className={styles.experiencesStepsDesc}
+            dangerouslySetInnerHTML={{ __html: experience.des }}
           ></div>
         </CardBody>
         <Divider />
         <CardFooter>
           <div className={styles.expSkillsContainer}>
-            {exprience.skills.map((skill: Record<string, any>) => (
+            {experience.skills.map((skill: Record<string, any>) => (
               <div key={skill.title} className={styles.expSkills}>
                 <p>&middot; {skill.title}</p>
               </div>
@@ -51,10 +51,10 @@ const Exprience = ({ exprience }: { exprience: Record<string, any> }) => {
         </CardFooter>
       </Card>
       <i className="step-line"></i>
-      <div >
+      <div>
         <Image
-          src={exprience.companyLogo}
-          alt={exprience.companyLogo}
+          src={experience.companyLogo}
+          alt={experience.companyLogo}
           width={65}
           height={65}
         />
@@ -63,4 +63,4 @@ const Exprience = ({ exprience }: { exprience: Record<string, any> }) => {
   );
 };
 
-export default Exprience;
+export default Experience;

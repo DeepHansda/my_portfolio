@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
 
 const axoisClient = axios.create({
-    baseURL: "https://my-portfolio-backend-deephansda.vercel.app/api",
+    baseURL: "https://my-portfolio-backend-lac.vercel.app/api",
     headers: {
         Accept: "application/json",
     }

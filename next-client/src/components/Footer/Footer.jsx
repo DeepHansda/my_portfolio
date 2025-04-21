@@ -1,5 +1,6 @@
-"use client"
+"use client";
 import SocialContactBar from "../UI/ContactBar/ContactBar";
+import ContactForm from "../UI/ContactForm/ContactForm";
 import EmailNumber from "../UI/EmailNumber/EmailNumber";
 import "./footer.css";
 function Footer() {
@@ -7,7 +8,7 @@ function Footer() {
     <div className="footer">
       <div className="footer-container">
         <div className="footer-title">
-          <h1>contact with me</h1>
+          <h1 className="text-5xl">contact with me</h1>
         </div>
         <div className="footer-sections">
           <div className="footer-container-section-1">
@@ -19,9 +20,11 @@ function Footer() {
               <div className="get-touch">get in touch</div>
             </div>
 
-            {/* <Form /> */}
-            <div className="social-wrapper-container">
-              <SocialContactBar />
+            <ContactForm />
+            <div className="social-wrapper-container mt-4">
+              <div className="w-fit md:ml-auto">
+                <SocialContactBar />
+              </div>
             </div>
           </div>
         </div>

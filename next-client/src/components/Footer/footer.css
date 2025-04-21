@@ -32,8 +32,7 @@
   justify-content: flex-end;
   padding: 25px 15px;
   position: relative;
-  z-index: 1
-
+  z-index: 1;
 }
 .get-touch {
   border-radius: 200px;
@@ -60,67 +59,63 @@
   z-index: -1;
 }
 
-.social-wrapper-container{
+.social-wrapper-container {
   width: 100%;
 }
 
-
 @media screen and (min-width: 600px) {
-  .footer-container{
-    padding:5px 60px;
-
+  .footer-container {
+    padding: 5px 60px;
   }
-    .footer-container .footer-title h1 {
-        font-size: 3em;
-      }
-      .social-wrapper-container{
-        width:auto;
-        margin:0 auto;
-      }
-      
-}
-@media screen and (min-width:834px){
-  .footer-sections{
-    display: flex;
-    /* flex-direction: row-reverse; */
-    padding:5px 40px;
 
-  }
-  .social-wrapper-container{
+  .social-wrapper-container {
     width: auto;
+    margin: 0 auto;
   }
-  .footer-container-section-1{
+  .social-wrapper-container {
+    margin: 1rem 0;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 834px) {
+  .footer-sections {
+    display: flex;
+    justify-content: space-between;
+    /* flex-direction: row-reverse; */
+  }
+
+  .footer-container-section-1 {
     margin-top: 75px;
   }
-  .footer-container-section-2{
+  .footer-container-section-2 {
     padding: 5px 15px;
   }
 }
-
-
-@media screen and (min-width:1280px){
-    .footer-container .footer-title h1 {
-        font-size: 5em;
-      }
-  .footer-sections{
-    max-width:1280px;
-    margin:0 auto;
+@media screen and (min-width: 1024px) {
+  .footer-container-section-2 {
+    max-width: 378px;
   }
-  
-  .footer-container-section-1{
+}
+
+@media screen and (min-width: 1280px) {
+  .footer-sections {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .footer-container-section-1 {
     margin-top: 100px;
   }
-  .footer-container-section-2{
-    padding:5px 60px 
-  }
-.get-touch-button {
-    margin:0 auto;
+  /* .footer-container-section-2 {
+    padding: 5px 60px;
+  } */
+  .get-touch-button {
+    margin: 0 auto;
     /* width: 800px; */
-}
-.get-touch {
-    width:150px;
-    height:150px;
+  }
+  .get-touch {
+    width: 150px;
+    height: 150px;
     font-size: 25px;
-}
-    
+  }
 }

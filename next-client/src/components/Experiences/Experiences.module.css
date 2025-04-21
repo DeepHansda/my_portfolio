@@ -1,27 +1,27 @@
-.exprience {
+.experience {
   max-width: 1280px;
   margin: 10px auto;
 }
-.exprienceTitle {
+.experienceTitle {
   width: 100%;
   text-align: left;
   padding: 20px;
   border-bottom: 1px solid #ffffff80;
 }
-.exprienceTitle h2 {
+.experienceTitle h2 {
   font-family: "Poppins", sans-serif;
   text-transform: capitalize;
   font-size: 3em;
   color: #fff;
 }
-.exprienceContainer{
-    padding: 10px;
+.experienceContainer {
+  padding: 10px;
 }
-.expriencesStepsDesc li {
+.experiencesStepsDesc li {
   font-size: 14px;
   list-style-type: disc;
 }
-.expriencesStepsImg {
+.experiencesStepsImg {
   width: 65px;
   height: 65px;
   overflow: hidden;
@@ -34,11 +34,11 @@
   box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 2rem #bc13fe,
     0 0 0.8rem #bc13fe, 0 0 2.8rem #bc13fe, inset 0 0 1.3rem #bc13fe;
 }
-.expriencesStepsImg img {
+.experiencesStepsImg img {
   max-width: 100%;
   height: fit-content;
 }
-.expContent{
+.expContent {
   padding: 30px;
   background-color: rgba(225, 225, 225, 0.05);
   backdrop-filter: blur(10px);
@@ -50,80 +50,74 @@
   width: 600px;
 }
 
-.stepDate,.expMonthfDiff{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: rgba(225, 225, 225, 0.1);
-    padding:2px 10px;
-    border-radius: 5px;
-    margin: 10px 0;
-    max-width: 150px;
-
+.stepDate,
+.expMonthfDiff {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(225, 225, 225, 0.1);
+  padding: 2px 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  max-width: 150px;
 }
-.expMonthfDiff{
+.expMonthfDiff {
   width: fit-content;
 }
-.stepDate p,.expMonthfDiff p{
-    font-size: 10px;
+.stepDate p,
+.expMonthfDiff p {
+  font-size: 10px;
 }
-
 
 .expCompany {
-  margin:10px 0;
-
+  margin: 10px 0;
 }
-.expCompany h4{
+.expCompany h4 {
   text-transform: uppercase;
 }
-.expCompany p{
+.expCompany p {
   text-transform: capitalize;
   font-size: small;
 }
 
-.expSkillsContainer{
+.expSkillsContainer {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   margin-top: 15px;
 }
-.expSkills{
-  margin:5px;
+.expSkills {
+  margin: 5px;
   padding: 2px 5px;
   background-color: rgba(225, 225, 225, 0.1);
   border-radius: 5px;
-
 }
-.expSkills:first-child{
+.expSkills:first-child {
   margin-left: 0;
 }
-.expSkills p{
-  font-size:12px;
-}
-.exMonthDiff p{
-
+.expSkills p {
+  font-size: 12px;
 }
 
-@media screen and (min-width:600px) {
-    .exprienceContainer{
-        padding: 15px;
-    }
-.expCompany {
-  display: flex;
+@media screen and (min-width: 600px) {
+  .experienceContainer {
+    padding: 15px;
+  }
+  .expCompany {
+    display: flex;
+  }
+  .expCompany p {
+    margin-left: 10px;
+  }
+  .expDateContainer {
+    display: flex;
+  }
+  .expMonthfDiff {
+    margin-left: 10px;
+  }
 }
-.expCompany p{
-  margin-left: 10px;
-}
-.expDateContainer{
-  display: flex;
-
-}
-.expMonthfDiff{
-  margin-left: 10px;
-}
-}
-@media screen and (min-width:1024px) {
-.exprienceTitle h2 {
+@media screen and (min-width: 1024px) {
+  .experienceTitle h2 {
     font-size: 5em;
-}
+  }
 }

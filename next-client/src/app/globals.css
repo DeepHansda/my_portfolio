@@ -50,6 +50,7 @@ body {
 }
 
 .steps-container {
+  display: flex;
   position: relative;
   background-color: inherit;
   width: calc(50% + 32px);
@@ -80,9 +81,6 @@ body {
   flex-direction: row-reverse;
 }
 
-.steps-container {
-  display: flex;
-}
 
 .steps .steps-container .date {
   font-weight: 900;
