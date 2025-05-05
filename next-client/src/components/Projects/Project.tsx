@@ -1,7 +1,7 @@
 "use client";
 import { Card, CardBody, CardFooter, CardHeader } from "@heroui/react";
-import ProjectImagesSlider from "./ProjectImagesSlider";
 import dynamic from "next/dynamic";
+import ProjectImagesSlider from "./ProjectImagesSlider";
 
 const ClientOnlySlider = dynamic(() => import("./ProjectImagesSlider"), {
   ssr: false, // 👈 super important!
@@ -14,11 +14,11 @@ export default function Project({
   const htmlString = `<div>${project.description}</div>`;
   return (
     <div>
-      <Card>
+      {/* <Card>
         <CardHeader>
           <div>
-            <ClientOnlySlider
-              images={project.project_img as Record<string, string>[]}
+            <ProjectImagesSlider
+              // images={project.project_img as Record<string, string>[]}
             />
           </div>
           <div>
@@ -29,7 +29,8 @@ export default function Project({
           <div dangerouslySetInnerHTML={{ __html: htmlString }} />
         </CardBody>
         <CardFooter></CardFooter>
-      </Card>
+      </Card> */}
+      <ProjectImagesSlider/>
     </div>
   );
 }

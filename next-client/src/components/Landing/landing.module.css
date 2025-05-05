@@ -1,7 +1,6 @@
 .home {
   width: 100vw;
   height: 100vh;
-  position: relative;
   padding: 0 0.75rem;
 }
 .home-background {
@@ -11,6 +10,9 @@
   overflow: hidden;
   /* z-index:; */
 }
+.home_container {
+  width: 100%;
+}
 .home-background img {
   width: 180%;
   height: 100%;
@@ -18,7 +20,7 @@
   /* object-fit: cover; */
   filter: blur(2px);
 }
-.home-intro {
+.home_intro {
   width: 100%;
 }
 .intro {
@@ -28,29 +30,29 @@
   padding: 0 0.75rem;
 }
 
-.home-intro-text {
+.home_intro_text {
   font-family: "Poppins", sans-serif;
   /* color: #fff; */
   width: fit-content;
   height: 100%;
   text-align: left;
 }
-.home-intro-text h2 {
+.home_intro_text h2 {
   font-size: 4rem;
   line-height: 1;
 }
-.home-intro-text p {
+.home_intro_text p {
   text-transform: capitalize;
   padding: 10px 0;
   font-size: 12px;
   max-width: 700px;
   margin: 0 auto;
 }
-.home-intro-text p span {
+.home_intro_text p span {
   font-weight: lighter;
 }
 
-.progress-bars {
+.progress_bars {
   padding: 20px 26px;
   z-index: 100;
 }
@@ -93,21 +95,35 @@
   border: none;
   background: transparent;
 }
-.git-img {
+.git_img {
   margin-top: 8px;
 }
-.git-img-container {
+.git_img_container {
   width: 100%;
   padding: 0 12px;
 }
 
 @media screen and (min-width: 600px) {
-  .home-intro-text h2 {
+  .home_intro_text h2 {
     font-size: 16vw;
   }
 }
 
+@media screen and (min-width: 768px) {
+  .git_img {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 100px;
+  }
+  .git_img_container {
+    max-width: 400px;
+  }
+}
+
 @media screen and (min-width: 1024px) {
+  .home {
+    height: calc(100vh - 400px);
+  }
   .home-background img {
     width: 100%;
     height: 100%;
@@ -115,29 +131,17 @@
     object-fit: cover;
     filter: blur(2px);
   }
-  .home-container {
-    width: 100%;
-    display: flex;
-    align-items: st;
-    justify-content: space-between;
+  .git_img_container {
+    max-width: 600px;
   }
-
-  .home-intro {
-    min-width: 340px;
-    max-width: 650px;
-  }
-
-  .home-intro-text h2 {
+  .home_intro_text h2 {
     font-size: 6rem;
   }
-  .home-intro-text p {
+  .home_intro_text p {
     font-size: 16px;
     /* margin-top:10px */
   }
-  .git-img {
-    min-width: 390px;
-    max-width: 450px;
-  }
+
   .progress-bar-container {
     display: flex;
     flex-direction: row;
@@ -152,23 +156,41 @@
 }
 
 @media screen and (min-width: 1279px) {
-  .home{
-  padding: 0 0.8rem;
+  .home {
+    padding: 0 0.8rem;
+    height: 100vh;
+  }
+  .home_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* height: 100%; */
+  }
 
+  .home_intro {
+    min-width: 340px;
+    max-width: 650px;
   }
   .intro {
     margin-top: 10px;
   }
-  .progress-bars {
+  .progress_bars {
     width: 100%;
   }
   .progress-bar-container {
     flex-direction: row;
   }
- 
-  .home-intro-text p span {
+
+  .home_intro_text p span {
     padding: 0;
     /* margin-top: 30px; */
     font-size: 14px;
+  }
+  .git_img {
+    flex-direction: column;
+    margin-top: 0px;
+  }
+  .git_img_container {
+    max-width: 450px;
   }
 }

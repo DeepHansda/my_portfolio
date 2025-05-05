@@ -1,3 +1,4 @@
+"use client";
 import { dateConverter } from "@/utils/dateConverter";
 import { monthDiff } from "@/utils/monthDiff";
 import { Card, CardBody, CardFooter, CardHeader, Divider } from "@heroui/react";
@@ -33,7 +34,7 @@ const Experience = ({ experience }: { experience: Record<string, any> }) => {
           </div>
         </CardHeader>
         <Divider />
-        <CardBody>
+        <CardBody className="px-6">
           <div
             className={styles.experiencesStepsDesc}
             dangerouslySetInnerHTML={{ __html: experience.des }}
@@ -51,12 +52,13 @@ const Experience = ({ experience }: { experience: Record<string, any> }) => {
         </CardFooter>
       </Card>
       <i className="step-line"></i>
-      <div>
+      <div className="w-14 h-14 md:w-16 md:h-16  overflow-hidden rounded-full flex items-center justify-center ring ring-secondary shadow shadow-secondary z-10 flex-shrink-0">
         <Image
           src={experience.companyLogo}
           alt={experience.companyLogo}
           width={65}
           height={65}
+          className="max-w-full"
         />
       </div>
     </div>

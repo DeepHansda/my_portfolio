@@ -9,8 +9,12 @@ function Experiences() {
     data: experiences,
     isLoading,
     error,
-  } = useQuery([GET_EXPRIENCES], () => request({ url: GET_EXPRIENCES }), {
-    select: (data) => data?.experiences,
+  } = useQuery({
+    queryKey: [GET_EXPRIENCES],
+    queryFn: () => request({ url: GET_EXPRIENCES }),
+    select(data) {
+      return data?.expriences;
+    }
   });
   return (
     <ContainerWithTitle title="Experiences.">
