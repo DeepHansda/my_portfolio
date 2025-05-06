@@ -12,9 +12,8 @@ function Experiences() {
   } = useQuery({
     queryKey: [GET_EXPRIENCES],
     queryFn: () => request({ url: GET_EXPRIENCES }),
-    select(data) {
-      return data?.expriences;
-    }
+    select:(data) =>data?.experiences
+    
   });
   return (
     <ContainerWithTitle title="Experiences.">

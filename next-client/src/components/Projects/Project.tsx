@@ -14,11 +14,11 @@ export default function Project({
   const htmlString = `<div>${project.description}</div>`;
   return (
     <div>
-      {/* <Card>
-        <CardHeader>
+      <Card>
+        <CardHeader className="flex-col items-start">
           <div>
             <ProjectImagesSlider
-              // images={project.project_img as Record<string, string>[]}
+              images={project.project_img as Record<string, string>[]}
             />
           </div>
           <div>
@@ -29,8 +29,7 @@ export default function Project({
           <div dangerouslySetInnerHTML={{ __html: htmlString }} />
         </CardBody>
         <CardFooter></CardFooter>
-      </Card> */}
-      <ProjectImagesSlider/>
+      </Card>
     </div>
   );
 }
