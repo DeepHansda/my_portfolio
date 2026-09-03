@@ -1,22 +1,30 @@
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-dotenv.config();
-// const uri = "mongodb://localhost:27017/my_portfolio";
-const uri = process.env.MONGO_URI;
+
 mongoose.set("strictQuery", true);
 
-const connection = () =>
-  mongoose
-    .connect(uri, {
-      useNewUrlParser: true,
-      // useCreateIndex:true,
-      useUnifiedTopology: true,
-    })
-    .then(() => {
-      console.log("mongodb connected");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+let cachedConnection = null;
+
+const connection = async () => {
+  const uri = process.env.MONGO_URI;
+
+  if (!uri) {
+    console.error("MongoDB Connection Error: MONGO_URI environment variable is missing.");
+    return null;
+  }
+
+  if (cachedConnection && mongoose.connection.readyState === 1) {
+    return cachedConnection;
+  }
+
+  try {
+    cachedConnection = await mongoose.connect(uri);
+    console.log("MongoDB connected successfully");
+    return cachedConnection;
+  } catch (err) {
+    console.error("MongoDB Connection Error:", err.message);
+    throw err;
+  }
+};
 
 module.exports = connection;
+

@@ -14,6 +14,10 @@ const projectSchema = new mongoose.Schema(
           trim: true,
           required: true,
         },
+        public_id: {
+          type: String,
+          trim: true,
+        },
       },
     ],
     title: {

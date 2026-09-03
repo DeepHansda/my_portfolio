@@ -1,17 +1,14 @@
 const cloudinary = require("cloudinary").v2;
 const multer = require("multer");
-const fs = require("fs");
-const path = require("path");
-const dotenv = require("dotenv");
+const fs = require("fs").promises;
 
-dotenv.config();
-
-
-
-
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const storage = multer.diskStorage({
-
   filename: (req, file, cb) => {
     cb(
       null,
@@ -21,40 +18,57 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = (req, file, cb) => {
-  if (file.mimetype == "image/jpeg" || file.mimetype == "image/png" || file.mimetype == "image/webp") {
+  const allowed = ["image/jpeg", "image/png", "image/webp"];
+  if (allowed.includes(file.mimetype)) {
     cb(null, true);
   } else {
-    cb({ message: "file format not supported" }, false);
+    cb(new Error("File format not supported. Allowed formats: JPEG, PNG, WebP"), false);
   }
 };
 
-const upload = multer({ storage: storage, fileFilter: fileFilter });
-
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
+const upload = multer({
+  storage,
+  fileFilter,
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
 });
 
-cloudinaryUploads = async (filePath, folder) => {
-  return cloudinary.uploader
-    .upload(filePath, { folder: folder })
-    .then((result) => {
-      return {
-        message: "upload successful",
-        public_id: result.public_id,
-        url: result.url,
-      };
-    })
-    .catch((error) => {
-      return {
-        message: "upload failed",
-        error: error,
-      };
-    });
+const cloudinaryUploads = async (filePath, folder = "portfolio_images") => {
+  try {
+    const result = await cloudinary.uploader.upload(filePath, { folder });
+    return {
+      success: true,
+      message: "upload successful",
+      public_id: result.public_id,
+      url: result.secure_url || result.url,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      message: "upload failed",
+      error: error.message || error,
+    };
+  } finally {
+    // Always clean up local temporary file after upload attempt
+    try {
+      await fs.unlink(filePath);
+    } catch (unlinkErr) {
+      // Ignore if file was already removed
+    }
+  }
+};
+
+const deleteCloudinaryImage = async (publicId) => {
+  if (!publicId) return;
+  try {
+    const res = await cloudinary.uploader.destroy(publicId);
+    return res;
+  } catch (err) {
+    console.error(`Failed to delete Cloudinary image with public_id ${publicId}:`, err.message);
+  }
 };
 
 module.exports = {
-  upload: upload,
-  cloudinaryUploads: cloudinaryUploads,
+  upload,
+  cloudinaryUploads,
+  deleteCloudinaryImage,
 };

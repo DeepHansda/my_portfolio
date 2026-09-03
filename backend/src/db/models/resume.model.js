@@ -1,10 +1,19 @@
 const mongoose = require("mongoose");
 
-const ResumeSchema = new mongoose.Schema({
-  resume: {
-    type: String,
-    trim: true,
-    required: true,
+const ResumeSchema = new mongoose.Schema(
+  {
+    resume: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
+    },
   },
-});
-module.exports = mongoose.model("resume", ResumeSchema);
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("Resume", ResumeSchema, "resumes");
+
