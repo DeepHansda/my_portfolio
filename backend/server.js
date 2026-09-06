@@ -6,6 +6,7 @@ const responseHandler = require("./src/middleware/responseHandler");
 const errorHandler = require("./src/middleware/errorHandler");
 
 const projectRouter = require("./src/routes/projects.route");
+const projectTypeRouter = require("./src/routes/project-type.routes");
 const contactRouter = require("./src/routes/contact.routes");
 const experienceRouter = require("./src/routes/experiences.routes");
 const resumeRouter = require("./src/routes/resume.routes");
@@ -32,6 +33,7 @@ app.use(
 
 // Routes
 app.use("/api", projectRouter);
+app.use("/api", projectTypeRouter);
 app.use("/api", contactRouter);
 app.use("/api", experienceRouter);
 app.use("/api", resumeRouter);

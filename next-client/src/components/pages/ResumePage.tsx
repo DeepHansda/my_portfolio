@@ -1,7 +1,64 @@
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import { resolveResumeUrls, ResolvedResumeUrls } from "@/lib/resumeUrl";
+
 export default function ResumePage() {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [resumeData, setResumeData] = useState<ResolvedResumeUrls | null>(null);
+
+  const fetchResume = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3400";
+      const res = await fetch(`${apiUrl}/api/getResume?latest=true`, {
+        headers: { Accept: "application/json" },
+        cache: "no-store",
+      });
+
+      if (!res.ok) {
+        throw new Error(`Server returned HTTP ${res.status}`);
+      }
+
+      const json = await res.json();
+      const payload = json.data;
+      let resumeLink = "";
+
+      if (Array.isArray(payload)) {
+        const active = payload.find((item: { isActive?: boolean; resume?: string }) => item?.isActive);
+        resumeLink = active?.resume || payload[0]?.resume || "";
+      } else if (payload && typeof payload === "object") {
+        resumeLink = payload.resume || payload.link || "";
+      }
+
+      if (!resumeLink) {
+        // Fallback to local /resume.pdf if no link in DB
+        resumeLink = "/resume.pdf";
+      }
+
+      const resolved = resolveResumeUrls(resumeLink);
+      setResumeData(resolved);
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Unable to reach resume server";
+      console.warn("Could not fetch remote resume, falling back to local:", msg);
+      setError(msg);
+      // Graceful fallback to local /resume.pdf
+      setResumeData(resolveResumeUrls("/resume.pdf"));
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchResume();
+  }, [fetchResume]);
+
   return (
     <main className="pt-16">
-      <div className="max-w-4xl mx-auto px-6 py-16">
+      <div className="max-w-5xl mx-auto px-6 py-16">
         <div className="section-label mb-4">Credentials</div>
         <h1
           className="font-display text-4xl font-black mb-4"
@@ -9,238 +66,173 @@ export default function ResumePage() {
         >
           My <span className="neon-text-cyan">Resume</span>
         </h1>
-        <p className="text-sm mb-10" style={{ color: "#64748b" }}>
+        <p className="text-sm mb-8" style={{ color: "#64748b" }}>
           View or download the full resume below.
         </p>
 
         {/* Action buttons */}
-        <div className="flex flex-wrap gap-4 mb-10">
-          <a href="/resume.pdf" download className="glowing-btn-solid">
-            Download Resume
-          </a>
-          <a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="glowing-btn"
+        <div className="flex flex-wrap items-center gap-4 mb-8">
+          {resumeData?.downloadUrl ? (
+            <a
+              href={resumeData.downloadUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              download={!resumeData.isGoogleDrive ? resumeData.filename : undefined}
+              className="glowing-btn-solid flex items-center gap-2"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3"
+                />
+              </svg>
+              <span>Download Resume</span>
+            </a>
+          ) : null}
+
+          {resumeData?.viewUrl ? (
+            <a
+              href={resumeData.viewUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glowing-btn flex items-center gap-2"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                />
+              </svg>
+              <span>Open in New Tab</span>
+            </a>
+          ) : null}
+
+          <button
+            type="button"
+            onClick={fetchResume}
+            title="Reload Resume"
+            aria-label="Reload Resume"
+            className="p-3 rounded text-slate-400 hover:text-cyan-400 hover:bg-[#060f2a] border border-[#1a3a6b] transition-all"
           >
-            Open in New Tab
-          </a>
+            <svg
+              className={`w-4 h-4 ${loading ? "animate-spin text-cyan-400" : ""}`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+              />
+            </svg>
+          </button>
         </div>
 
-        {/* PDF viewer */}
+        {/* PDF viewer HUD Card */}
         <div
-          className="hud-card overflow-hidden"
-          style={{ minHeight: "700px" }}
+          className="hud-card overflow-hidden flex flex-col relative rounded-lg border border-[#1a3a6b]"
+          style={{ minHeight: "700px", height: "80vh" }}
         >
-          <div className="terminal-header">
-            <span className="terminal-dot" style={{ background: "#ff5f57" }} />
-            <span className="terminal-dot" style={{ background: "#ffbd2e" }} />
-            <span className="terminal-dot" style={{ background: "#28c840" }} />
-            <span
-              className="ml-2 font-mono text-xs"
-              style={{ color: "#475569" }}
-            >
-              resume.pdf — viewer
-            </span>
+          {/* Terminal Header */}
+          <div className="terminal-header flex items-center justify-between px-4 py-3 bg-[#030b20] border-b border-[#1a3a6b]">
+            <div className="flex items-center gap-2">
+              <span className="terminal-dot inline-block w-3 h-3 rounded-full" style={{ background: "#ff5f57" }} />
+              <span className="terminal-dot inline-block w-3 h-3 rounded-full" style={{ background: "#ffbd2e" }} />
+              <span className="terminal-dot inline-block w-3 h-3 rounded-full" style={{ background: "#28c840" }} />
+              <span
+                className="ml-2 font-mono text-xs truncate max-w-[200px] sm:max-w-md"
+                style={{ color: "#94a3b8" }}
+              >
+                {resumeData?.isGoogleDrive
+                  ? "resume.pdf — [Google Drive stream]"
+                  : `${resumeData?.filename || "resume.pdf"} — [PDF viewer]`}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <span
+                className="flex items-center gap-1.5 font-mono text-xs"
+                style={{ color: loading ? "#00f5ff" : "#39ff14" }}
+              >
+                <span
+                  className={`inline-block w-2 h-2 rounded-full ${
+                    loading ? "bg-[#00f5ff] animate-ping" : "bg-[#39ff14] animate-pulse"
+                  }`}
+                />
+                {loading ? "STREAMING" : "ONLINE"}
+              </span>
+            </div>
           </div>
 
-          {/* Fallback UI when no actual PDF is mounted */}
-          <div
-            className="p-8"
-            style={{ fontFamily: "'JetBrains Mono', monospace" }}
-          >
-            <div className="text-center mb-10" style={{ color: "#475569" }}>
-              <div className="font-mono text-xs mb-2">
-                {"// PDF viewer — attach resume.pdf to /public"}
-              </div>
-            </div>
-
-            {/* Resume content preview */}
-            <div className="max-w-2xl mx-auto space-y-8">
-              {/* Header */}
-              <div
-                style={{
-                  borderBottom: "1px solid #1a3a6b",
-                  paddingBottom: "1.5rem",
-                }}
-              >
-                <h2 className="font-display text-2xl font-black neon-text-cyan mb-1">
-                  ALEX VOSS
-                </h2>
-                <div
-                  className="font-display text-sm font-semibold mb-3"
-                  style={{ color: "#a855f7" }}
-                >
-                  Full-Stack Developer
-                </div>
-                <div
-                  className="flex flex-wrap gap-4 font-mono text-xs"
-                  style={{ color: "#64748b" }}
-                >
-                  <span>alex@voss.dev</span>
-                  <span>github.com/alexvoss</span>
-                  <span>linkedin.com/in/alexvoss</span>
-                  <span>San Francisco, CA</span>
+          {/* Viewer Frame Container */}
+          <div className="relative flex-1 w-full h-full bg-[#020818]">
+            {loading && (
+              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#020818]/90 backdrop-blur-xs">
+                <div className="w-10 h-10 border-2 border-cyan-400/20 border-t-cyan-400 rounded-full animate-spin mb-4" />
+                <div className="font-mono text-xs text-cyan-400 tracking-wider animate-pulse">
+                  {"// FETCHING RESUME DATA STREAM..."}
                 </div>
               </div>
+            )}
 
-              {/* Summary */}
-              <div>
-                <div className="font-mono text-xs mb-3 neon-text-cyan">
-                  {"> SUMMARY"}
+            {resumeData?.previewUrl ? (
+              <iframe
+                key={resumeData.previewUrl}
+                src={resumeData.previewUrl}
+                title="Resume PDF Preview"
+                className="w-full h-full border-0 bg-[#020818]"
+                allow="autoplay; encrypted-media; fullscreen"
+              />
+            ) : !loading ? (
+              <div className="flex flex-col items-center justify-center h-full p-8 text-center font-mono">
+                <div className="text-amber-400 text-sm mb-2">
+                  {"// NO RESUME DOCUMENT AVAILABLE"}
                 </div>
-                <p
-                  className="text-sm leading-relaxed"
-                  style={{ color: "#94a3b8" }}
-                >
-                  Full-stack developer with 5+ years of experience building
-                  scalable web applications, REST APIs, and real-time systems.
-                  Proficient in React, Node.js, TypeScript, and cloud platforms.
-                  Passionate about clean code, performance, and user experience.
+                <p className="text-xs text-slate-500 mb-6 max-w-sm">
+                  {error || "Could not load the resume preview. Please verify connection and try again."}
                 </p>
-              </div>
-
-              {/* Experience */}
-              <div>
-                <div className="font-mono text-xs mb-4 neon-text-cyan">
-                  {"> EXPERIENCE"}
-                </div>
-                <div className="space-y-5">
-                  {[
-                    {
-                      role: "Senior Software Developer",
-                      company: "NexaCore Systems",
-                      period: "2023 — Present",
-                      items: [
-                        "Real-time dashboard for 50K+ concurrent users",
-                        "Microservices migration reducing latency by 60%",
-                      ],
-                    },
-                    {
-                      role: "Full-Stack Developer",
-                      company: "Orbital Labs",
-                      period: "2021 — 2023",
-                      items: [
-                        "Enterprise web applications for 3 clients",
-                        "CI/CD pipeline implementation",
-                      ],
-                    },
-                    {
-                      role: "Frontend Developer",
-                      company: "Pixel Forge Studio",
-                      period: "2019 — 2021",
-                      items: [
-                        "Pixel-perfect responsive UI implementation",
-                        "Open-source component library (2K+ stars)",
-                      ],
-                    },
-                  ].map((exp) => (
-                    <div
-                      key={exp.role}
-                      className="pl-4"
-                      style={{ borderLeft: "2px solid #00f5ff30" }}
-                    >
-                      <div className="flex flex-wrap justify-between gap-2 mb-1">
-                        <span
-                          className="text-sm font-semibold"
-                          style={{ color: "#e2e8f0" }}
-                        >
-                          {exp.role}
-                        </span>
-                        <span
-                          className="font-mono text-xs"
-                          style={{ color: "#a855f7" }}
-                        >
-                          {exp.period}
-                        </span>
-                      </div>
-                      <div
-                        className="font-mono text-xs mb-2"
-                        style={{ color: "#00f5ff" }}
-                      >
-                        {exp.company}
-                      </div>
-                      <ul className="space-y-1">
-                        {exp.items.map((item, i) => (
-                          <li
-                            key={i}
-                            className="text-xs flex gap-2"
-                            style={{ color: "#64748b" }}
-                          >
-                            <span style={{ color: "#00f5ff40" }}>▸</span>
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Skills */}
-              <div>
-                <div className="font-mono text-xs mb-3 neon-text-cyan">
-                  {"> SKILLS"}
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    "React",
-                    "Next.js",
-                    "TypeScript",
-                    "Node.js",
-                    "NestJS",
-                    "PostgreSQL",
-                    "MongoDB",
-                    "AWS",
-                    "Docker",
-                    "Python",
-                  ].map((s) => (
-                    <span
-                      key={s}
-                      className="font-mono text-xs px-2 py-0.5"
-                      style={{
-                        border: "1px solid #1a3a6b",
-                        color: "#94a3b8",
-                        background: "#020818",
-                      }}
-                    >
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Education */}
-              <div>
-                <div className="font-mono text-xs mb-3 neon-text-cyan">
-                  {"> EDUCATION"}
-                </div>
-                <div
-                  className="pl-4"
-                  style={{ borderLeft: "2px solid #a855f730" }}
+                <button
+                  onClick={fetchResume}
+                  className="glowing-btn text-xs px-4 py-2"
                 >
-                  <div
-                    className="text-sm font-semibold"
-                    style={{ color: "#e2e8f0" }}
-                  >
-                    B.S. Computer Science
-                  </div>
-                  <div
-                    className="font-mono text-xs"
-                    style={{ color: "#a855f7" }}
-                  >
-                    University of California, Berkeley
-                  </div>
-                  <div
-                    className="font-mono text-xs mt-1"
-                    style={{ color: "#475569" }}
-                  >
-                    2015 — 2019
-                  </div>
-                </div>
+                  Retry Connection
+                </button>
               </div>
-            </div>
+            ) : null}
+          </div>
+        </div>
+
+        {/* Informational Footer */}
+        <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs font-mono text-slate-500">
+          <div>
+            Format: {resumeData?.isGoogleDrive ? "Google Drive Embedded Document" : "Direct PDF Asset"}
+          </div>
+          <div>
+            Having trouble with inline preview?{" "}
+            <a
+              href={resumeData?.viewUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-cyan-400 hover:underline inline-flex items-center gap-1"
+            >
+              Open in New Tab &rarr;
+            </a>
           </div>
         </div>
       </div>

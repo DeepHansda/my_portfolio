@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { cloudinaryUploads, deleteCloudinaryImage } = require("../services/projects.service");
 const ProjectModel = require("../db/models/project.model");
+const ProjectTypeModel = require("../db/models/project-type.model");
 const asyncHandler = require("../utils/asyncHandler");
 
 module.exports = {
@@ -35,6 +36,15 @@ module.exports = {
 
     if (!title || !description || !type) {
       return res.error("Type, title, and description are required", 400);
+    }
+
+    if (!mongoose.Types.ObjectId.isValid(type)) {
+      return res.error("Invalid project type ID format", 400);
+    }
+
+    const typeExists = await ProjectTypeModel.findById(type);
+    if (!typeExists) {
+      return res.error("Project type not found", 404);
     }
 
     let techList = [];
@@ -73,8 +83,36 @@ module.exports = {
 
   showProjects: asyncHandler(async (req, res) => {
     const { type } = req.query;
-    const filter = type ? { type } : {};
-    const projects = await ProjectModel.find(filter).sort({ rating: -1 });
+    let filter = {};
+
+    if (type && type.trim().toLowerCase() !== "all") {
+      if (mongoose.Types.ObjectId.isValid(type)) {
+        filter.type = type;
+      } else {
+        const rawKey = type.trim();
+        const slugKey = rawKey
+          .replace(/([a-z])([A-Z])/g, "$1-$2")
+          .replace(/[\s_]+/g, "-")
+          .toLowerCase();
+        const escapedKey = rawKey.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        const foundType = await ProjectTypeModel.findOne({
+          $or: [
+            { key: rawKey.toLowerCase() },
+            { key: slugKey },
+            { name: new RegExp(`^${escapedKey}$`, "i") },
+          ],
+        });
+        if (foundType) {
+          filter.type = foundType._id;
+        } else {
+          return res.success([], "Success");
+        }
+      }
+    }
+
+    const projects = await ProjectModel.find(filter)
+      .populate("type")
+      .sort({ rating: -1, createdAt: -1 });
 
     return res.success(projects, "Success");
   }),
@@ -102,5 +140,20 @@ module.exports = {
     await ProjectModel.findByIdAndDelete(id);
 
     return res.success(project, "Deleted successfully");
+  }),
+
+  getProjectById: asyncHandler(async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.error("Invalid project ID", 400);
+    }
+
+    const project = await ProjectModel.findById(id).populate("type");
+    if (!project) {
+      return res.error("Project not found", 404);
+    }
+
+    return res.success(project, "Success");
   }),
 };

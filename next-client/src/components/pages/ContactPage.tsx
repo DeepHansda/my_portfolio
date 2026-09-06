@@ -1,27 +1,57 @@
 "use client";
 
 import { useState } from "react";
+import { toast } from "@/lib/toast";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     email: "",
-    subject: "",
+    contactNumber: "",
     message: "",
   });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 3000);
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setLoading(true);
+
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3400";
+      const res = await fetch(`${apiUrl}/api/createContact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          contactNumber: formData.contactNumber,
+          message: formData.message,
+        }),
+      });
+
+      const json = await res.json();
+      const result = toast.api(json);
+
+      if (result.success) {
+        setSent(true);
+        setTimeout(() => setSent(false), 4000);
+        setFormData({ fullName: "", email: "", contactNumber: "", message: "" });
+      }
+    } catch (err) {
+      toast.api(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const inputBase = {
     border: "1px solid #1a3a6b",
     color: "#e2e8f0",
   };
+
 
   return (
     <main className="pt-16">
@@ -192,36 +222,61 @@ export default function ContactPage() {
 
               <form onSubmit={handleSubmit} className="p-6 space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  {(["name", "email"] as const).map((field) => (
-                    <div key={field}>
-                      <label
-                        className="font-mono text-xs block mb-2"
-                        style={{ color: "#475569" }}
-                      >
-                        <span style={{ color: "#00f5ff40" }}>$ </span>
-                        {field.toUpperCase()} *
-                      </label>
-                      <input
-                        type={field === "email" ? "email" : "text"}
-                        required
-                        value={formData[field]}
-                        onChange={(e) =>
-                          setFormData({ ...formData, [field]: e.target.value })
-                        }
-                        className="w-full bg-transparent px-4 py-3 font-mono text-sm outline-none transition-all duration-200"
-                        style={inputBase}
-                        onFocus={(e) => {
-                          e.currentTarget.style.borderColor = "#00f5ff";
-                          e.currentTarget.style.boxShadow =
-                            "0 0 10px #00f5ff20";
-                        }}
-                        onBlur={(e) => {
-                          e.currentTarget.style.borderColor = "#1a3a6b";
-                          e.currentTarget.style.boxShadow = "none";
-                        }}
-                      />
-                    </div>
-                  ))}
+                  <div>
+                    <label
+                      className="font-mono text-xs block mb-2"
+                      style={{ color: "#475569" }}
+                    >
+                      <span style={{ color: "#00f5ff40" }}>$ </span>FULL_NAME *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.fullName}
+                      onChange={(e) =>
+                        setFormData({ ...formData, fullName: e.target.value })
+                      }
+                      className="w-full bg-transparent px-4 py-3 font-mono text-sm outline-none transition-all duration-200"
+                      style={inputBase}
+                      onFocus={(e) => {
+                        e.currentTarget.style.borderColor = "#00f5ff";
+                        e.currentTarget.style.boxShadow =
+                          "0 0 10px #00f5ff20";
+                      }}
+                      onBlur={(e) => {
+                        e.currentTarget.style.borderColor = "#1a3a6b";
+                        e.currentTarget.style.boxShadow = "none";
+                      }}
+                    />
+                  </div>
+
+                  <div>
+                    <label
+                      className="font-mono text-xs block mb-2"
+                      style={{ color: "#475569" }}
+                    >
+                      <span style={{ color: "#00f5ff40" }}>$ </span>EMAIL *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) =>
+                        setFormData({ ...formData, email: e.target.value })
+                      }
+                      className="w-full bg-transparent px-4 py-3 font-mono text-sm outline-none transition-all duration-200"
+                      style={inputBase}
+                      onFocus={(e) => {
+                        e.currentTarget.style.borderColor = "#00f5ff";
+                        e.currentTarget.style.boxShadow =
+                          "0 0 10px #00f5ff20";
+                      }}
+                      onBlur={(e) => {
+                        e.currentTarget.style.borderColor = "#1a3a6b";
+                        e.currentTarget.style.boxShadow = "none";
+                      }}
+                    />
+                  </div>
                 </div>
 
                 <div>
@@ -229,14 +284,13 @@ export default function ContactPage() {
                     className="font-mono text-xs block mb-2"
                     style={{ color: "#475569" }}
                   >
-                    <span style={{ color: "#00f5ff40" }}>$ </span>SUBJECT *
+                    <span style={{ color: "#00f5ff40" }}>$ </span>CONTACT_NUMBER
                   </label>
                   <input
-                    type="text"
-                    required
-                    value={formData.subject}
+                    type="tel"
+                    value={formData.contactNumber}
                     onChange={(e) =>
-                      setFormData({ ...formData, subject: e.target.value })
+                      setFormData({ ...formData, contactNumber: e.target.value })
                     }
                     className="w-full bg-transparent px-4 py-3 font-mono text-sm outline-none transition-all duration-200"
                     style={inputBase}
@@ -278,8 +332,14 @@ export default function ContactPage() {
                   />
                 </div>
 
-                <button type="submit" className="glowing-btn-solid w-full">
-                  {sent ? (
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="glowing-btn-solid w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {loading ? (
+                    <span className="animate-pulse">{"// Transmitting..."}</span>
+                  ) : sent ? (
                     <span style={{ color: "#39ff14" }}>
                       {"// Transmission Successful ✓"}
                     </span>

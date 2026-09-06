@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "@/styles/index.css";
 import Nav from "@/components/Nav";
+import Toaster from "@/components/ui/Toaster";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "DEEP.HANSDA",
@@ -17,6 +19,8 @@ export default function RootLayout({
       <body>
         <Nav />
         {children}
+        <Toaster />
+        <Footer />
       </body>
     </html>
   );

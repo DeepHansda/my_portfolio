@@ -20,7 +20,17 @@ module.exports = {
   }),
 
   getResume: asyncHandler(async (req, res) => {
-    const resumes = await ResumeModel.find().sort({ createdAt: -1 });
+    const filter = {};
+    if (req.query.active !== undefined) {
+      filter.isActive = req.query.active === "true";
+    }
+
+    const resumes = await ResumeModel.find(filter).sort({ createdAt: -1 });
+
+    if (req.query.latest === "true") {
+      return res.success(resumes[0] || null, "Success");
+    }
+
     return res.success(resumes, "Success");
   }),
 
