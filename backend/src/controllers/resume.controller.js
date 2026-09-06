@@ -1,78 +1,52 @@
+const mongoose = require("mongoose");
 const ResumeModel = require("../db/models/resume.model");
+const asyncHandler = require("../utils/asyncHandler");
 
 module.exports = {
-  uploadResume: async (req, res) => {
-    try {
-      const { link } = req.body;
+  uploadResume: asyncHandler(async (req, res) => {
+    const { link } = req.body;
 
-      const resume = new ResumeModel({ resume: link });
-      const savedResume = await resume.save();
-
-      res.status(201).json({
-        success: 1,
-        message: "Resume added successfully.",
-        data: savedResume,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        success: 0,
-        message: "Something went wrong.",
-        error: error.message,
-      });
+    if (!link || typeof link !== "string" || !link.trim()) {
+      return res.error("A valid resume link is required.", 400);
     }
-  },
 
-  getResume: async (req, res) => {
-    try {
-      const resumes = await ResumeModel.find();
+    const resume = new ResumeModel({
+      resume: link.trim(),
+      isActive: true,
+    });
 
-      if (!resumes.length) {
-        return res.status(404).json({
-          success: 0,
-          message: "No resumes found.",
-        });
-      }
+    const savedResume = await resume.save();
+    return res.success(savedResume, "Resume added successfully.", 201);
+  }),
 
-      res.status(200).json({
-        success: 1,
-        message: "Success",
-        data: resumes,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        success: 0,
-        message: "Something went wrong.",
-        error: error.message,
-      });
+  getResume: asyncHandler(async (req, res) => {
+    const filter = {};
+    if (req.query.active !== undefined) {
+      filter.isActive = req.query.active === "true";
     }
-  },
 
-  deleteResume: async (req, res) => {
-    try {
-      const { id } = req.params;
-      const deletedResume = await ResumeModel.findByIdAndDelete(id);
+    const resumes = await ResumeModel.find(filter).sort({ createdAt: -1 });
 
-      if (!deletedResume) {
-        return res.status(404).json({
-          success: 0,
-          message: "Resume not found.",
-        });
-      }
-
-      res.status(200).json({
-        success: 1,
-        message: "Resume deleted successfully.",
-        data: deletedResume,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        success: 0,
-        message: "Something went wrong.",
-        error: error.message,
-      });
+    if (req.query.latest === "true") {
+      return res.success(resumes[0] || null, "Success");
     }
-  },
+
+    return res.success(resumes, "Success");
+  }),
+
+  deleteResume: asyncHandler(async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.error("Invalid resume ID format.", 400);
+    }
+
+    const deletedResume = await ResumeModel.findByIdAndDelete(id);
+
+    if (!deletedResume) {
+      return res.error("Resume not found.", 404);
+    }
+
+    return res.success(deletedResume, "Resume deleted successfully.");
+  }),
 };

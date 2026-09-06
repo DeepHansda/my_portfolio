@@ -1,89 +1,60 @@
-const { mailService } = require("../services/contact.service");
+const mongoose = require("mongoose");
 const ContactModel = require("../db/models/contacts.model");
+const { mailService } = require("../services/contact.service");
+const asyncHandler = require("../utils/asyncHandler");
 
 module.exports = {
-  createContact: async (req, res) => {
-    try {
-      const { fullName, email, contactNumber, message } = req.body;
-      const data = { fullName, email, contactNumber, message };
+  createContact: asyncHandler(async (req, res) => {
+    const { fullName, email, contactNumber, message } = req.body;
 
-      const mailResponse = await mailService(data);
-
-      if (!mailResponse) {
-        return res.status(400).json({
-          success: 0,
-          message: "Something went wrong while sending email",
-        });
-      }
-
-      const contact = new ContactModel(data);
-      const savedContact = await contact.save();
-
-      res.status(201).json({
-        success: 1,
-        message: "Message created successfully",
-        data: savedContact,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        success: 0,
-        message: "Something went wrong",
-        error: error.message,
-      });
+    if (!fullName || !fullName.trim()) {
+      return res.error("Full name is required", 400);
     }
-  },
-
-  showContacts: async (req, res) => {
-    try {
-      const contacts = await ContactModel.find({});
-
-      if (!contacts.length) {
-        return res.status(404).json({
-          success: 0,
-          message: "Contacts not found",
-        });
-      }
-
-      res.status(200).json({
-        success: 1,
-        message: "Success",
-        data: contacts,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        success: 0,
-        message: "Something went wrong",
-        error: error.message,
-      });
+    if (!email || !email.trim()) {
+      return res.error("Email is required", 400);
     }
-  },
-
-  deleteContact: async (req, res) => {
-    try {
-      const { id } = req.params;
-      const deletedContact = await ContactModel.findByIdAndDelete(id);
-
-      if (!deletedContact) {
-        return res.status(404).json({
-          success: 0,
-          message: "Contact not found",
-        });
-      }
-
-      res.status(200).json({
-        success: 1,
-        message: "Contact deleted successfully",
-        data: deletedContact,
-      });
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({
-        success: 0,
-        message: "Deletion failed",
-        error: error.message,
-      });
+    if (!message || !message.trim()) {
+      return res.error("Message is required", 400);
     }
-  },
+
+    const data = {
+      fullName: fullName.trim(),
+      email: email.trim(),
+      contactNumber: contactNumber ? String(contactNumber).trim() : "",
+      message: message.trim(),
+    };
+
+    // 1. Save to MongoDB FIRST to guarantee zero message loss
+    const contact = new ContactModel(data);
+    const savedContact = await contact.save();
+
+    // 2. Trigger auto-reply and admin notification in background
+    mailService(data).catch((mailErr) => {
+      console.error("Email notification failed:", mailErr.message);
+    });
+
+    return res.success(savedContact, "Message created successfully", 201);
+  }),
+
+  showContacts: asyncHandler(async (req, res) => {
+    const contacts = await ContactModel.find({}).sort({ createdAt: -1 });
+    // Always return 200 OK with contacts list (even if empty)
+    return res.success(contacts, "Success");
+  }),
+
+  deleteContact: asyncHandler(async (req, res) => {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.error("Invalid contact ID", 400);
+    }
+
+    const deletedContact = await ContactModel.findByIdAndDelete(id);
+
+    if (!deletedContact) {
+      return res.error("Contact not found", 404);
+    }
+
+    return res.success(deletedContact, "Contact deleted successfully");
+  }),
 };

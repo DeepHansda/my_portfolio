@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const ExprienceSchema = new mongoose.Schema(
+const ExperienceSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -49,7 +49,7 @@ const ExprienceSchema = new mongoose.Schema(
       },
     ],
   },
-  { timestamps: { createdAt: true, updatedAt: true } }
+  { timestamps: { createdAt: true, updatedAt: true } },
 );
 
-module.exports = mongoose.model("Exprience", ExprienceSchema);
+module.exports = mongoose.model("Experience", ExperienceSchema);

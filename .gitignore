@@ -28,6 +28,8 @@ next-client/coverage
 # next.js
 next-client/.next/
 next-client/out/
+next-client/dist/
+next-client/.turbo/
 
 # production
 next-client/build
