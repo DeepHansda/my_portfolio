@@ -28,7 +28,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section className="py-24 max-w-6xl mx-auto px-6">
+    <section className="py-20 max-w-6xl mx-auto px-6">
       <div className="section-label mb-4">What I do</div>
       <h2
         className="font-display text-3xl font-bold mb-12"
@@ -58,10 +58,7 @@ export default function Services() {
             >
               {svc.title}
             </h3>
-            <p
-              className="text-sm leading-relaxed"
-              style={{ color: "#64748b" }}
-            >
+            <p className="text-sm leading-relaxed" style={{ color: "#64748b" }}>
               {svc.desc}
             </p>
           </div>

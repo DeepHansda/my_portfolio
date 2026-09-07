@@ -51,7 +51,7 @@ export default function Experiences() {
   return (
     <section
       id="experiences"
-      className="py-24"
+      className="py-20"
       style={{
         background:
           "linear-gradient(180deg, transparent, #060f2a60, transparent)",

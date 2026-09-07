@@ -53,15 +53,15 @@ export default function Contact() {
   };
 
   return (
-    <section className="py-24 max-w-6xl mx-auto px-6">
-      <div className="section-label mb-4">Get in touch</div>
+    <section className="py-12 md:py-14 max-w-6xl mx-auto px-6">
+      <div className="section-label mb-3">Get in touch</div>
       <h2
-        className="font-display text-3xl font-bold mb-4"
+        className="font-display text-3xl font-bold mb-3"
         style={{ color: "#e2e8f0" }}
       >
         Send a <span className="neon-text-cyan">Message</span>
       </h2>
-      <p className="text-sm mb-12" style={{ color: "#64748b" }}>
+      <p className="text-sm mb-8" style={{ color: "#64748b" }}>
         Have a project in mind? Let&apos;s talk.
       </p>
 
@@ -71,9 +71,9 @@ export default function Contact() {
           {[
             {
               label: "Email",
-              value: "deephansda@gmail.com",
+              value: "deephansda921@gmail.com",
               mono: true,
-              href: "mailto:deephansda@gmail.com",
+              href: "mailto:deephansda921@gmail.com",
             },
             {
               label: "GitHub",
@@ -87,25 +87,53 @@ export default function Contact() {
               mono: true,
               href: "https://www.linkedin.com/in/deep-hansda-44627a20a/",
             },
-          ].map((item) => (
-            <a
-              key={item.label}
-              href={item.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hud-card p-4 block hover:border-[#00f5ff50] transition-colors"
-            >
-              <div
-                className="font-mono text-xs mb-1"
-                style={{ color: "#475569" }}
+            {
+              label: "X (Twitter)",
+              value: "x.com/DeepHansda31337",
+              mono: true,
+              href: "https://x.com/DeepHansda31337",
+            },
+            {
+              label: "Location",
+              value: "Asansol, West Bengal",
+              mono: true,
+            },
+          ].map((item) =>
+            item.href ? (
+              <a
+                key={item.label}
+                href={item.href}
+                target={item.href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={item.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                className="hud-card p-4 block hover:border-[#00f5ff50] transition-colors"
               >
-                {item.label}
+                <div
+                  className="font-mono text-xs mb-1"
+                  style={{ color: "#475569" }}
+                >
+                  {item.label}
+                </div>
+                <div className="font-mono text-sm" style={{ color: "#00f5ff" }}>
+                  {item.value}
+                </div>
+              </a>
+            ) : (
+              <div
+                key={item.label}
+                className="hud-card p-4 block hover:border-[#00f5ff50] transition-colors"
+              >
+                <div
+                  className="font-mono text-xs mb-1"
+                  style={{ color: "#475569" }}
+                >
+                  {item.label}
+                </div>
+                <div className="font-mono text-sm" style={{ color: "#00f5ff" }}>
+                  {item.value}
+                </div>
               </div>
-              <div className="font-mono text-sm" style={{ color: "#00f5ff" }}>
-                {item.value}
-              </div>
-            </a>
-          ))}
+            )
+          )}
         </div>
 
         {/* Form */}
