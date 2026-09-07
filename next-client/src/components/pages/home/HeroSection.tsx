@@ -166,7 +166,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative min-h-screen flex items-center grid-bg pt-20 pb-16 overflow-hidden"
+      className="relative min-h-screen flex items-center grid-bg pt-20 pb-8 md:pb-10 overflow-hidden"
       style={{
         background:
           "linear-gradient(135deg, #020818 0%, #060f2a 50%, #020818 100%)",

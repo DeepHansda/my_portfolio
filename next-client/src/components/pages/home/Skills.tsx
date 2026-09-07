@@ -1,8 +1,8 @@
 const skills = {
   Frontend: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS"],
-  Backend: ["Node.js", "NestJS", "Django", "REST APIs"],
+  Backend: ["Node.js", "NestJS", "FastAPI", "REST APIs"],
   Database: ["PostgreSQL", "MongoDB"],
-  "Cloud & DevOps": ["AWS", "GCP", "Docker", "CI/CD"],
+  Languages: ["Javascript", "Typescript", "Python", "Java", "C++"],
   Tools: ["Git", "GitHub", "VS Code", "Figma"],
 };
 

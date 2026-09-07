@@ -53,3 +53,7 @@ next-client/.vercel
 # typescript
 next-client/*.tsbuildinfo
 next-client/next-env.d.ts
+
+#graphify
+graphify-out/
+.agents

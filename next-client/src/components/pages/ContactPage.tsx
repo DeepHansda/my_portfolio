@@ -84,9 +84,17 @@ export default function ContactPage() {
               </div>
 
               {[
-                { label: "Email", value: "alex@voss.dev", icon: "✉" },
-                { label: "Phone", value: "+1 (415) 555-0182", icon: "◉" },
-                { label: "Location", value: "San Francisco, CA", icon: "◎" },
+                {
+                  label: "Email",
+                  value: "deephansda921@gmail.com",
+                  href: "mailto:deephansda921@gmail.com",
+                  icon: "✉",
+                },
+                {
+                  label: "Location",
+                  value: "Asansol, West Bengal",
+                  icon: "◎",
+                },
               ].map((item) => (
                 <div key={item.label} className="flex gap-4 items-start">
                   <span
@@ -102,12 +110,22 @@ export default function ContactPage() {
                     >
                       {item.label}
                     </div>
-                    <div
-                      className="font-mono text-sm"
-                      style={{ color: "#e2e8f0" }}
-                    >
-                      {item.value}
-                    </div>
+                    {item.href ? (
+                      <a
+                        href={item.href}
+                        className="font-mono text-sm transition-colors hover:text-[#00f5ff]"
+                        style={{ color: "#e2e8f0" }}
+                      >
+                        {item.value}
+                      </a>
+                    ) : (
+                      <div
+                        className="font-mono text-sm"
+                        style={{ color: "#e2e8f0" }}
+                      >
+                        {item.value}
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -125,26 +143,28 @@ export default function ContactPage() {
                 {[
                   {
                     label: "GitHub",
-                    handle: "@alexvoss",
-                    href: "#",
+                    handle: "@DeepHansda",
+                    href: "https://github.com/DeepHansda",
                     color: "#e2e8f0",
                   },
                   {
                     label: "LinkedIn",
-                    handle: "in/alexvoss",
-                    href: "#",
+                    handle: "in/deep-hansda-44627a20a",
+                    href: "https://www.linkedin.com/in/deep-hansda-44627a20a/",
                     color: "#0a66c2",
                   },
                   {
-                    label: "Twitter",
-                    handle: "@alexvoss_dev",
-                    href: "#",
+                    label: "X (Twitter)",
+                    handle: "@DeepHansda31337",
+                    href: "https://x.com/DeepHansda31337",
                     color: "#1da1f2",
                   },
                 ].map((social) => (
                   <a
                     key={social.label}
                     href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center justify-between py-2 transition-all duration-200 group"
                     style={{ borderBottom: "1px solid #1a3a6b10" }}
                   >
